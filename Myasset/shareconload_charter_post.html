@@ -1,0 +1,154 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap');
+  .post-wrap { font-family: 'DM Sans', sans-serif; background: #fff; max-width: 680px; border: 0.5px solid #e2e0d8; border-radius: 16px; overflow: hidden; }
+  .hero { background: #1B2B4B; padding: 40px 40px 32px; position: relative; overflow: hidden; }
+  .hero-pattern { position: absolute; inset: 0; opacity: 0.06; background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 24px 24px; }
+  .hero-accent { position: absolute; bottom: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: #F26322; opacity: 0.12; }
+  .hero-accent2 { position: absolute; top: -30px; right: 60px; width: 100px; height: 100px; border-radius: 50%; background: #F26322; opacity: 0.08; }
+  .logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .logo-icon { display: flex; gap: 3px; align-items: flex-end; }
+  .logo-sq1 { width: 14px; height: 14px; background: #F26322; border-radius: 2px; }
+  .logo-sq2 { width: 10px; height: 10px; background: #fff; border-radius: 2px; opacity: 0.9; }
+  .logo-text { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 18px; color: #fff; letter-spacing: -0.3px; }
+  .logo-text span { color: #F26322; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(242,99,34,0.2); border: 1px solid rgba(242,99,34,0.4); color: #F26322; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 5px 12px; border-radius: 4px; margin-bottom: 16px; }
+  .hero h1 { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 30px; color: #fff; line-height: 1.2; margin: 0 0 10px; letter-spacing: -0.5px; }
+  .hero h1 span { color: #F26322; }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0; max-width: 460px; }
+  .body { padding: 32px 40px; }
+  .intro-block { border-left: 3px solid #F26322; padding-left: 16px; margin-bottom: 28px; }
+  .intro-block p { font-size: 15px; color: #1B2B4B; line-height: 1.7; margin: 0; font-style: italic; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #F26322; margin: 0 0 14px; }
+  .body-text { font-size: 14.5px; color: #374151; line-height: 1.75; margin: 0 0 20px; }
+  .body-text strong { color: #1B2B4B; font-weight: 600; }
+  .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 28px; }
+  .benefit { background: #F8F7F4; border: 0.5px solid #e5e3da; border-radius: 10px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
+  .benefit-icon { width: 32px; height: 32px; background: #1B2B4B; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .benefit-icon i { color: #F26322; font-size: 15px; }
+  .benefit-text { font-size: 13px; color: #374151; line-height: 1.5; font-weight: 400; }
+  .benefit-text strong { display: block; color: #1B2B4B; font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+  .divider { border: none; border-top: 0.5px solid #E8E6DF; margin: 24px 0; }
+  .charter-box { background: #1B2B4B; border-radius: 12px; padding: 24px 28px; margin: 0 0 24px; }
+  .charter-box h2 { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 17px; color: #fff; margin: 0 0 6px; }
+  .charter-box p { font-size: 13px; color: rgba(255,255,255,0.65); margin: 0 0 18px; }
+  .charter-perks { display: flex; flex-direction: column; gap: 10px; }
+  .perk { display: flex; align-items: flex-start; gap: 10px; }
+  .perk-medal { width: 24px; height: 24px; background: rgba(242,99,34,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .perk-medal i { color: #F26322; font-size: 13px; }
+  .perk-text { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.5; padding-top: 3px; }
+  .limit-banner { display: flex; align-items: center; gap: 12px; background: rgba(242,99,34,0.08); border: 1px solid rgba(242,99,34,0.25); border-radius: 10px; padding: 14px 18px; margin: 0 0 24px; }
+  .limit-banner i { color: #F26322; font-size: 20px; flex-shrink: 0; }
+  .limit-text { font-size: 13.5px; color: #1B2B4B; font-weight: 600; }
+  .limit-text span { font-weight: 400; color: #6B7280; }
+  .cta-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 7px; background: #F26322; color: #fff; font-weight: 700; font-size: 14px; padding: 13px 24px; border-radius: 8px; text-decoration: none; letter-spacing: 0.2px; font-family: 'Manrope', sans-serif; }
+  .cta-btn i { font-size: 15px; }
+  .cta-secondary { font-size: 13px; color: #6B7280; line-height: 1.5; }
+  .cta-secondary strong { color: #1B2B4B; }
+  .tags-row { padding: 0 40px 28px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 11.5px; color: #1B2B4B; background: #EEF0F5; padding: 4px 10px; border-radius: 100px; font-weight: 500; }
+  .footer-bar { background: #F8F7F4; border-top: 0.5px solid #E8E6DF; padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-brand { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 13px; color: #1B2B4B; }
+  .footer-brand span { color: #F26322; }
+  .footer-tagline { font-size: 12px; color: #9CA3AF; }
+</style>
+
+<div class="post-wrap">
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-accent2"></div>
+    <div style="position:relative; z-index:1;">
+      <div class="logo-row">
+        <div class="logo-icon">
+          <div class="logo-sq1"></div>
+          <div class="logo-sq2" style="margin-left:-4px; margin-bottom:2px;"></div>
+        </div>
+        <div class="logo-text">Share<span>Con</span>Load</div>
+      </div>
+      <div class="hero-tag"><i class="ti ti-ship" aria-hidden="true"></i> Announcement</div>
+      <h1>Every Empty Container<br>Is <span>Revenue Left Behind.</span></h1>
+      <p class="hero-sub">The era of fragmented systems, endless calls, and slow manual coordination is changing.</p>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="intro-block">
+      <p>For too long, container operators and carriers have depended on fragmented systems and slow manual coordination to secure cargo. That era is changing.</p>
+    </div>
+
+    <div class="section-label">Introducing ShareConLoad</div>
+    <p class="body-text">A <strong>digital freight marketplace</strong> built to connect container operators directly with verified cargo owners across Africa — designed to maximise utilisation, reduce friction, and move freight smarter.</p>
+
+    <div class="benefits-grid">
+      <div class="benefit">
+        <div class="benefit-icon"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+        <div class="benefit-text"><strong>Maximise Utilisation</strong>Fill every container with real cargo demand</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon"><i class="ti ti-bolt" aria-hidden="true"></i></div>
+        <div class="benefit-text"><strong>Faster Access</strong>Connect to cargo opportunities instantly</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+        <div class="benefit-text"><strong>Payment Protection</strong>Operate with transparency and security</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon"><i class="ti ti-world" aria-hidden="true"></i></div>
+        <div class="benefit-text"><strong>Less Friction</strong>No brokers, no endless calls, no delays</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="charter-box">
+      <h2>Charter Member Programme</h2>
+      <p>Only 20 Operators will be granted founding status. These are the businesses recognised from day one as early movers in the next evolution of African logistics.</p>
+      <div class="charter-perks">
+        <div class="perk">
+          <div class="perk-medal"><i class="ti ti-medal" aria-hidden="true"></i></div>
+          <div class="perk-text">Permanent founding recognition on the platform</div>
+        </div>
+        <div class="perk">
+          <div class="perk-medal"><i class="ti ti-eye" aria-hidden="true"></i></div>
+          <div class="perk-text">Priority visibility within the ShareConLoad ecosystem</div>
+        </div>
+        <div class="perk">
+          <div class="perk-medal"><i class="ti ti-trending-up" aria-hidden="true"></i></div>
+          <div class="perk-text">Early positioning before wider market expansion</div>
+        </div>
+        <div class="perk">
+          <div class="perk-medal"><i class="ti ti-users" aria-hidden="true"></i></div>
+          <div class="perk-text">Direct strategic engagement as the platform grows</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="limit-banner">
+      <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+      <div class="limit-text">Charter Membership is limited to <strong style="color:#F26322;">20 Operators only.</strong> <span>The companies that move early define the industry that follows.</span></div>
+    </div>
+
+    <div class="cta-row">
+      <a href="https://shareconload.com" class="cta-btn"><i class="ti ti-arrow-right" aria-hidden="true"></i> Register at shareconload.com</a>
+      <div class="cta-secondary">Comment <strong>"CHARTER"</strong> or send a DM<br>to begin the onboarding process.</div>
+    </div>
+  </div>
+
+  <div class="tags-row">
+    <span class="tag">#ShareConLoad</span>
+    <span class="tag">#AfricanLogistics</span>
+    <span class="tag">#ContainerShipping</span>
+    <span class="tag">#FreightMarketplace</span>
+    <span class="tag">#SupplyChainAfrica</span>
+    <span class="tag">#DigitalLogistics</span>
+    <span class="tag">#FreightTech</span>
+    <span class="tag">#VeyQonGroup</span>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">Share<span>Con</span>Load</div>
+    <div class="footer-tagline">Share the Load. Connect the World.</div>
+  </div>
+</div>

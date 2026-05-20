@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+html[data-theme="veyqon"] {
+  --color-primary: #C8A45D;
+  --color-primary-content: #080B0D;
+  --color-secondary: #9E7B3C;
+  --color-secondary-content: #F5F5F3;
+  --color-base-100: #080B0D;
+  --color-base-200: #1C1F26;
+  --color-base-300: #374151;
+  --color-base-content: #F5F5F3;
+  --color-neutral: #6B7280;
+  --color-neutral-content: #F5F5F3;
+  color-scheme: dark;
+}
+
+@theme {
+  --font-heading: var(--font-sora);
+  --font-body: var(--font-inter);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+}
