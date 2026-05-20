@@ -104,16 +104,16 @@ export default function AboutPage() {
           <div className="mb-12">
             <SectionHeading eyebrow="Leadership" heading="Who Leads VeyQon Group" />
           </div>
-          <div className="max-w-sm">
+          <div className="max-w-md">
             <div className="card bg-base-200 border border-base-300 overflow-hidden">
-              <div className="relative h-80 w-full">
+              <div className="relative h-[560px] w-full">
                 <Image
                   src="/ceo.png"
                   alt="Mercy McAfful Baloyi — Co-Founder & CEO, VeyQon Group"
                   fill
                   className="object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-base-200/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-base-200 via-base-200/20 to-transparent" />
               </div>
               <div className="p-8 space-y-4">
                 <div>
