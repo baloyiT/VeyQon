@@ -32,7 +32,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-neutral text-sm leading-relaxed">
-              Building trusted digital infrastructure for modern African business.
+              Building trusted digital infrastructure for modern business worldwide.
             </p>
             <a
               href="https://www.linkedin.com/company/veyqon-group/"

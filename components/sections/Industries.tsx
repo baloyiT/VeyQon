@@ -6,7 +6,7 @@ const industries = [
     icon: Truck,
     title: 'Logistics & Freight',
     description:
-      'Container movement, freight coordination, and cargo visibility across southern and west African routes.',
+      'Container movement, freight coordination, and cargo visibility across global trade routes.',
   },
   {
     icon: Radio,
@@ -30,7 +30,7 @@ export function Industries() {
           <SectionHeading
             eyebrow="Industries"
             heading="Sectors We Serve"
-            subtext="Our platforms are built for the operational realities of African business environments."
+            subtext="Our platforms are built for the operational realities of complex business environments worldwide."
           />
         </div>
         <div className="grid md:grid-cols-3 gap-6">

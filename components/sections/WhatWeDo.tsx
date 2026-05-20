@@ -31,7 +31,7 @@ export function WhatWeDo() {
           <SectionHeading
             eyebrow="What We Do"
             heading="Operational Technology Built for Real Environments"
-            subtext="We build the digital systems that make African businesses more visible, more coordinated, and more effective."
+            subtext="We build the digital systems that make businesses worldwide more visible, more coordinated, and more effective."
           />
         </div>
         <div className="grid md:grid-cols-3 gap-6">

@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Join the Waitlist — ShareConLoad by VeyQon Group',
   description:
-    "Secure your early access to ShareConLoad — Africa's digital freight marketplace connecting container operators with verified cargo.",
+    "Secure your early access to ShareConLoad — the global digital freight marketplace connecting container operators with verified cargo.",
 }
 
 export default function WaitlistPage() {
@@ -19,8 +19,8 @@ export default function WaitlistPage() {
           Join the ShareConLoad Waitlist
         </h1>
         <p className="text-neutral text-lg leading-relaxed">
-          ShareConLoad is Africa's digital freight marketplace — connecting container operators
-          with verified cargo opportunities across southern and west African routes. Secure your
+          ShareConLoad is the global digital freight marketplace — connecting container operators
+          with verified cargo opportunities across worldwide trade routes. Secure your
           early access position before public launch.
         </p>
         <div className="space-y-4">

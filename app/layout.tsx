@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     'VeyQon Group develops operational technologies and digital platforms that improve visibility, coordination, and execution across logistics, infrastructure, and enterprise operations.',
   openGraph: {
     title: 'VeyQon Group',
-    description: "Building Digital Platforms for Africa's Operational Economy.",
+    description: "Building Digital Platforms for the Modern Operational Economy.",
     type: 'website',
   },
 }

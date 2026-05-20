@@ -18,11 +18,11 @@ export function Hero() {
         <div className="max-w-3xl">
           <div className="space-y-8">
             <p className="text-primary text-sm font-semibold uppercase tracking-widest">
-              Africa's Operational Technology Group
+              Global Operational Technology Group
             </p>
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              Building Digital Platforms for Africa's{' '}
-              <span className="text-primary">Operational Economy</span>
+              Building Digital Platforms for the{' '}
+              <span className="text-primary">Modern Operational Economy</span>
             </h1>
             <p className="text-neutral text-lg md:text-xl leading-relaxed max-w-lg">
               VeyQon Group develops operational technologies and digital platforms

@@ -15,7 +15,7 @@ export function FinalCTA() {
           Build Smarter Operations with VeyQon Group
         </h2>
         <p className="text-neutral text-lg leading-relaxed">
-          Join the businesses across Africa that are replacing fragmented operations with digital
+          Join the businesses replacing fragmented operations with digital
           platforms built for scale.
         </p>
         <div className="flex flex-wrap justify-center gap-4">

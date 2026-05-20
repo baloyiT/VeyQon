@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { CheckCircle2, Target, Gem, Eye, Shield, Compass } from 'lucide-react'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -7,7 +8,7 @@ import { GoldIcon } from '@/components/ui/GoldIcon'
 export const metadata: Metadata = {
   title: 'About — VeyQon Group',
   description:
-    'VeyQon Group builds practical digital infrastructure for African industries, improving coordination, visibility, and operational efficiency.',
+    'VeyQon Group builds practical digital infrastructure for industries worldwide, improving coordination, visibility, and operational efficiency.',
 }
 
 
@@ -30,7 +31,7 @@ export default function AboutPage() {
             About VeyQon Group
           </p>
           <h1 className="text-5xl md:text-6xl font-bold leading-tight max-w-4xl mx-auto">
-            Building Practical Digital Infrastructure for African Industries
+            Building Practical Digital Infrastructure for Modern Industries
           </h1>
           <p className="text-neutral text-lg leading-relaxed max-w-2xl mx-auto">
             VeyQon Group develops operational platforms and enterprise technologies that improve
@@ -45,20 +46,20 @@ export default function AboutPage() {
           <div className="max-w-3xl space-y-6 text-base-content/80 leading-relaxed">
             <SectionHeading eyebrow="Our Story" heading="Who We Are" />
             <p>
-              VeyQon Group is an African operational technology company building digital platforms
+              VeyQon Group is an operational technology company building digital platforms
               and enterprise systems for industries that rely on coordination, movement, and
-              infrastructure.
+              infrastructure worldwide.
             </p>
             <p>
-              We started with a simple observation: across African logistics and infrastructure
+              We started with a simple observation: across global logistics and infrastructure
               sectors, the biggest operational problems are not caused by a lack of capacity. They
               are caused by a lack of visibility and coordination. Containers move empty. Cargo
               waits for operators. Systems do not talk to each other.
             </p>
             <p>
               Our answer is practical digital platforms built for the real operational environment
-              of African business, not for a hypothetical version of it. We build with the
-              constraints, connectivity realities, and commercial dynamics of our markets in mind.
+              of modern business, not for a hypothetical version of it. We build with the
+              constraints, connectivity realities, and commercial dynamics of real markets in mind.
             </p>
             <p>
               VeyQon Group is the parent of ShareConLoad and future ventures in fintech, AI
@@ -76,7 +77,7 @@ export default function AboutPage() {
             {[
               {
                 label: 'Vision',
-                text: "To be Africa's most trusted technology group, enabling the next generation of digital infrastructure and enterprise innovation.",
+                text: "To be the world's most trusted technology group, enabling the next generation of digital infrastructure and enterprise innovation.",
               },
               {
                 label: 'Mission',
@@ -104,23 +105,26 @@ export default function AboutPage() {
             <SectionHeading eyebrow="Leadership" heading="Who Leads VeyQon Group" />
           </div>
           <div className="max-w-sm">
-            <div className="card bg-base-200 border border-base-300 p-8 space-y-5">
-              <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/40 flex items-center justify-center">
-                <span
-                  className="text-primary font-bold text-xl"
-                  style={{ fontFamily: 'var(--font-sora)' }}
-                >
-                  MB
-                </span>
+            <div className="card bg-base-200 border border-base-300 overflow-hidden">
+              <div className="relative h-80 w-full">
+                <Image
+                  src="/ceo.png"
+                  alt="Mercy McAfful Baloyi — Co-Founder & CEO, VeyQon Group"
+                  fill
+                  className="object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-base-200/80 via-transparent to-transparent" />
               </div>
-              <div>
-                <p className="font-bold text-lg">Mercy McAfful Baloyi</p>
-                <p className="text-primary text-sm">Co-Founder & Chief Executive Officer</p>
+              <div className="p-8 space-y-4">
+                <div>
+                  <p className="font-bold text-lg">Mercy McAfful Baloyi</p>
+                  <p className="text-primary text-sm">Co-Founder & Chief Executive Officer</p>
+                </div>
+                <p className="text-neutral text-sm leading-relaxed">
+                  Responsible for strategic direction, product conceptualisation, platform
+                  development, and operational execution across the VeyQon Group portfolio.
+                </p>
               </div>
-              <p className="text-neutral text-sm leading-relaxed">
-                Responsible for strategic direction, product conceptualisation, platform
-                development, and operational execution across the VeyQon Group portfolio.
-              </p>
             </div>
           </div>
         </div>

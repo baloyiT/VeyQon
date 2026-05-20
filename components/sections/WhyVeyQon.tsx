@@ -7,13 +7,13 @@ const points = [
     icon: Map,
     title: 'Operational Understanding',
     description:
-      'We build from deep familiarity with how African logistics and enterprise operations actually work, not how they should work in theory.',
+      'We build from deep familiarity with how complex logistics and enterprise operations actually work across global markets, not how they should work in theory.',
   },
   {
     icon: Globe,
-    title: 'African Context',
+    title: 'Built for Complexity',
     description:
-      'Our platforms are designed for African infrastructure realities: connectivity constraints, route complexity, and multi-currency environments.',
+      "Our platforms are engineered for the world's most demanding operational environments — connectivity constraints, route complexity, and multi-currency markets.",
   },
   {
     icon: TrendingUp,

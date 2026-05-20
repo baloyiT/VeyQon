@@ -1,7 +1,7 @@
 import { Globe, Building2, Container, BarChart3 } from 'lucide-react'
 
 const items = [
-  { icon: Globe, label: 'Built for African Operational Environments' },
+  { icon: Globe, label: 'Built for Complex Operational Environments' },
   { icon: Building2, label: 'Enterprise-Focused Technology' },
   { icon: Container, label: 'Logistics & Infrastructure Solutions' },
   { icon: BarChart3, label: 'Operational Intelligence Platforms' },
