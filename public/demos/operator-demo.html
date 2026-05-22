@@ -1,0 +1,2221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ShareConLoad — Operator Demo</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #1B2A4A;
+  --orange: #F26522;
+  --salmon: #F4A27A;
+  --bg: #F8F9FA;
+  --white: #ffffff;
+  --grey-100: #F1F3F5;
+  --grey-200: #E9ECEF;
+  --grey-300: #DEE2E6;
+  --grey-400: #CED4DA;
+  --grey-600: #6C757D;
+  --grey-800: #343A40;
+  --green: #28A745;
+  --blue: #2563EB;
+  --red: #DC3545;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --radius-lg: 16px;
+  --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--grey-800);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── PROGRESS BAR ── */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--white);
+  border-bottom: 1px solid var(--grey-200);
+  padding: 10px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progress-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.progress-pct {
+  font-size: 12px;
+  color: var(--grey-600);
+}
+
+.progress-track {
+  height: 4px;
+  background: var(--grey-200);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--orange));
+  border-radius: 2px;
+  transition: width var(--transition);
+}
+
+.progress-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--grey-300);
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--orange);
+  transform: scale(1.3);
+}
+
+.dot.visited {
+  background: var(--navy);
+}
+
+/* ── VIEWPORT ── */
+#viewport {
+  margin-top: 70px;
+  margin-bottom: 80px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── SCREEN ── */
+.screen {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  min-height: calc(100vh - 150px);
+  transform: translateX(100%);
+  transition: transform var(--transition);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.screen.active {
+  position: relative;
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.screen.exit-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.screen.exit-right {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+}
+
+.card-sm { padding: 14px; }
+.card-lg { padding: 28px; }
+
+/* ── NAV BUTTONS ── */
+#nav-btns {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--white);
+  border-top: 1px solid var(--grey-200);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+}
+.btn-primary:hover { background: #d4541c; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid var(--grey-300);
+}
+.btn-outline:hover { border-color: var(--navy); }
+
+.btn-navy {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-navy:hover { background: #142038; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--grey-600);
+  border: none;
+  padding: 10px 14px;
+}
+.btn-ghost:hover { color: var(--navy); }
+
+.btn-white-outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255,255,255,0.6);
+}
+.btn-white-outline:hover { background: rgba(255,255,255,0.1); }
+
+.btn-red-outline {
+  background: transparent;
+  color: var(--red);
+  border: 2px solid var(--red);
+}
+.btn-red-outline:hover { background: var(--red); color: var(--white); }
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 16px;
+}
+
+.btn-full { width: 100%; justify-content: center; }
+
+.btn-grey {
+  background: var(--grey-200);
+  color: var(--grey-600);
+  cursor: not-allowed;
+}
+
+/* ── BADGES ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-green { background: #d4edda; color: #155724; }
+.badge-orange { background: #fff3cd; color: #856404; }
+.badge-blue { background: #cce5ff; color: #004085; }
+.badge-grey { background: var(--grey-200); color: var(--grey-600); }
+.badge-red { background: #f8d7da; color: #721c24; }
+.badge-navy { background: var(--navy); color: var(--white); }
+
+/* ── SECTION WRAPPER ── */
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+/* ── TYPOGRAPHY ── */
+h1 { font-size: 28px; font-weight: 800; color: var(--navy); line-height: 1.2; }
+h2 { font-size: 22px; font-weight: 700; color: var(--navy); }
+h3 { font-size: 17px; font-weight: 700; color: var(--navy); }
+h4 { font-size: 14px; font-weight: 600; color: var(--grey-600); text-transform: uppercase; letter-spacing: 0.06em; }
+p { font-size: 14px; line-height: 1.6; color: var(--grey-600); }
+
+/* ── FORM ELEMENTS ── */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--grey-600);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--grey-300);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--grey-800);
+  background: var(--white);
+  transition: border-color 0.2s;
+}
+.form-input:focus { outline: none; border-color: var(--navy); }
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--grey-200);
+  margin: 16px 0;
+}
+
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid var(--grey-200);
+  margin-bottom: 20px;
+}
+.tab {
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--grey-600);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+.tab.active {
+  color: var(--navy);
+  border-bottom-color: var(--orange);
+}
+
+/* ── TABLE ── */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+th {
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--grey-100);
+  color: var(--grey-600);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--grey-200);
+}
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--grey-100);
+  color: var(--grey-800);
+  vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tr.highlight { background: #FFF8F4; }
+tr:hover { background: #FAFAFA; }
+
+/* ── KPI TILES ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kpi-tile {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--grey-200);
+}
+
+.kpi-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--grey-600);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.kpi-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.kpi-sub {
+  font-size: 11px;
+  color: var(--grey-600);
+  margin-top: 4px;
+}
+
+/* ── CHAT BUBBLE ── */
+.chat-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.bubble-row.right { flex-direction: row-reverse; }
+
+.bubble-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.avatar-navy { background: var(--navy); color: var(--white); }
+.avatar-grey { background: var(--grey-300); color: var(--grey-600); }
+
+.bubble {
+  max-width: 68%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  position: relative;
+}
+
+.bubble-right {
+  background: var(--navy);
+  color: var(--white);
+  border-bottom-right-radius: 4px;
+}
+
+.bubble-left {
+  background: var(--grey-100);
+  color: var(--grey-800);
+  border-bottom-left-radius: 4px;
+}
+
+.bubble-time {
+  font-size: 10px;
+  color: var(--grey-400);
+  margin-top: 4px;
+  display: block;
+}
+
+.bubble-right .bubble-time { text-align: right; color: rgba(255,255,255,0.5); }
+
+.bubble-sender {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--grey-600);
+  margin-bottom: 2px;
+}
+
+/* ── PAYOUT STAGES ── */
+.payout-stages {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 20px 0;
+  position: relative;
+}
+
+.payout-stage {
+  flex: 1;
+  text-align: center;
+  padding: 16px 10px;
+  background: var(--white);
+  border: 1.5px solid var(--grey-300);
+  position: relative;
+  z-index: 1;
+}
+
+.payout-stage:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.payout-stage:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+
+.payout-stage.green {
+  background: #f0fff4;
+  border-color: var(--green);
+}
+
+.payout-stage.orange {
+  background: #fff8f0;
+  border-color: var(--orange);
+}
+
+.payout-stage.grey {
+  background: var(--grey-100);
+  border-color: var(--grey-300);
+}
+
+.payout-connector {
+  width: 24px; height: 4px;
+  background: var(--grey-300);
+  flex-shrink: 0;
+  z-index: 0;
+  margin: 0 -1px;
+}
+
+.payout-connector.active { background: var(--green); }
+
+/* ── REVIEW STARS ── */
+.stars { color: #F59E0B; font-size: 14px; }
+
+/* ── PULSE ANIMATION ── */
+@keyframes pulse-orange {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.pulse { animation: pulse-orange 1.8s ease-in-out infinite; }
+
+/* ── WATERMARK ── */
+#watermark {
+  position: fixed;
+  bottom: 100px;
+  right: -30px;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--navy);
+  opacity: 0.15;
+  transform: rotate(-35deg);
+  pointer-events: none;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+/* ── SCREEN 1 — LANDING ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #0f1e38 100%);
+  min-height: calc(100vh - 150px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242,101,34,0.12) 0%, transparent 70%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,162,122,0.08) 0%, transparent 70%);
+}
+
+.logo-hero {
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-white { color: var(--white); }
+.logo-orange { color: var(--orange); }
+
+.hero-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  position: relative; z-index: 1;
+}
+
+.hero-headline {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 14px;
+  position: relative; z-index: 1;
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  position: relative; z-index: 1;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 44px;
+  position: relative; z-index: 1;
+}
+
+.hero-props {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 36px;
+  position: relative; z-index: 1;
+}
+
+.hero-prop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-prop-icon {
+  font-size: 24px;
+}
+
+.hero-prop-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  font-weight: 500;
+  text-align: center;
+}
+
+.social-proof {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 40px;
+  padding: 10px 24px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  position: relative; z-index: 1;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.social-dot { color: rgba(255,255,255,0.3); }
+
+.hero-footer {
+  position: absolute;
+  bottom: 20px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  z-index: 1;
+}
+
+/* ── SCREEN 2 — ONBOARDING ── */
+.onboard-layout {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 20px;
+}
+
+.benefits-panel {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  height: fit-content;
+}
+
+.benefits-panel h3 { color: var(--white); margin-bottom: 16px; font-size: 15px; }
+
+.benefit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px;
+}
+
+.benefit-row:last-of-type { border-bottom: none; }
+.benefit-label { color: rgba(255,255,255,0.65); }
+.benefit-value { color: var(--orange); font-weight: 700; }
+
+.review-note {
+  margin-top: 16px;
+  background: rgba(255,255,255,0.07);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+}
+
+/* ── SCREEN 3 — LISTING ── */
+.listing-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  align-items: start;
+}
+
+.preview-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--grey-200);
+}
+
+.preview-header {
+  background: linear-gradient(135deg, var(--navy), #0f1e38);
+  padding: 16px;
+  color: var(--white);
+}
+
+.preview-route {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.preview-vessel {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+}
+
+.preview-body { padding: 16px; }
+
+.preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--grey-100);
+  font-size: 13px;
+}
+
+.preview-row:last-child { border-bottom: none; }
+.preview-key { color: var(--grey-600); }
+.preview-val { font-weight: 600; color: var(--navy); }
+
+.cargo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.cargo-tag {
+  background: var(--grey-100);
+  color: var(--grey-600);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--grey-800);
+}
+
+.checkbox-box {
+  width: 16px; height: 16px;
+  border-radius: 3px;
+  border: 2px solid var(--grey-300);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 10px;
+  color: var(--white);
+}
+.checkbox-box.checked { background: var(--navy); border-color: var(--navy); }
+.checkbox-box.unchecked { background: var(--white); }
+
+/* ── SCREEN 4 — BOOKING REQUEST ── */
+.notif-banner {
+  background: #FFF3CD;
+  border: 1px solid #FBBF24;
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.notif-banner-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #92400E;
+}
+
+.notif-pulse {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: pulse-orange 1s infinite;
+  flex-shrink: 0;
+}
+
+.customer-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--grey-200);
+  margin-bottom: 14px;
+}
+
+.customer-avatar-lg {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--orange));
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.customer-info h3 { font-size: 16px; margin-bottom: 4px; }
+
+.customer-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.meta-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--grey-600);
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.cargo-photos {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.photo-thumb {
+  width: 64px; height: 64px;
+  border-radius: var(--radius-sm);
+  background: var(--grey-200);
+  border: 1px solid var(--grey-300);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  color: var(--grey-400);
+}
+
+.accept-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+/* ── SCREEN 5 — DASHBOARD ── */
+.payout-summary-card {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.payout-summary-card h3 { color: var(--white); margin-bottom: 16px; }
+
+.payout-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px;
+}
+
+.payout-row:last-of-type { border-bottom: none; }
+.payout-stage-label { color: rgba(255,255,255,0.65); }
+.payout-amount { font-weight: 700; }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── SCREEN 6 — MESSAGES ── */
+.messages-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.messages-header h2 { font-size: 18px; }
+
+.back-btn {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--grey-100);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  color: var(--navy);
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+}
+
+.chat-meta-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--grey-100);
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--grey-600);
+}
+
+.chat-container {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--grey-200);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-input-bar {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid var(--grey-200);
+}
+
+.chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--grey-300);
+  border-radius: 24px;
+  font-size: 13px;
+  outline: none;
+}
+
+.compliance-note {
+  font-size: 11px;
+  color: var(--grey-400);
+  text-align: center;
+  padding: 8px 12px;
+  border-top: 1px solid var(--grey-100);
+}
+
+.new-badge {
+  display: inline-block;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: 0.06em;
+  margin-left: 6px;
+  text-transform: uppercase;
+}
+
+/* ── SCREEN 7 — PAYOUT TRACKER ── */
+.balance-card {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.balance-left h4 { color: rgba(255,255,255,0.55); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.balance-amount { font-size: 26px; font-weight: 800; }
+.balance-pending { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+.transaction-list { margin-top: 8px; }
+
+.txn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--grey-100);
+  font-size: 13px;
+}
+.txn-row:last-child { border-bottom: none; }
+.txn-date { color: var(--grey-600); }
+.txn-amount-pos { color: var(--green); font-weight: 700; }
+.txn-amount-neg { color: var(--red); font-weight: 700; }
+
+/* ── SCREEN 8 — PERFORMANCE ── */
+.verified-card {
+  background: var(--navy);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.verified-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.verified-icon {
+  font-size: 28px;
+}
+
+.verified-info h3 { color: var(--white); font-size: 16px; margin-bottom: 4px; }
+.verified-sub { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+.preferred-pill {
+  background: var(--orange);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.perf-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.perf-tile {
+  background: var(--white);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  text-align: center;
+}
+
+.perf-tile-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.perf-tile-label {
+  font-size: 11px;
+  color: var(--grey-600);
+  margin-top: 4px;
+}
+
+.review-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.review-card {
+  background: var(--white);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.review-text {
+  font-size: 13px;
+  color: var(--grey-800);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.review-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-author {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.review-date {
+  font-size: 11px;
+  color: var(--grey-400);
+}
+
+.trend-up {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ── UTILITY ── */
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.mt-4 { margin-top: 4px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+.mb-4 { margin-bottom: 4px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.text-orange { color: var(--orange); }
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+.text-grey { color: var(--grey-600); }
+.text-navy { color: var(--navy); }
+.text-sm { font-size: 12px; }
+.text-xs { font-size: 11px; }
+.font-bold { font-weight: 700; }
+.font-800 { font-weight: 800; }
+.w-full { width: 100%; }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar">
+  <div class="progress-top">
+    <span class="progress-label" id="step-label">Step 1 of 8 — Landing</span>
+    <span class="progress-pct" id="step-pct">12.5%</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill" style="width:12.5%"></div>
+  </div>
+  <div class="progress-dots">
+    <div class="dot active" onclick="goTo(0)" title="Landing"></div>
+    <div class="dot" onclick="goTo(1)" title="Onboarding"></div>
+    <div class="dot" onclick="goTo(2)" title="List Shipment"></div>
+    <div class="dot" onclick="goTo(3)" title="Booking Request"></div>
+    <div class="dot" onclick="goTo(4)" title="Dashboard"></div>
+    <div class="dot" onclick="goTo(5)" title="Messages"></div>
+    <div class="dot" onclick="goTo(6)" title="Payout Tracker"></div>
+    <div class="dot" onclick="goTo(7)" title="Performance"></div>
+  </div>
+</div>
+
+<!-- VIEWPORT -->
+<div id="viewport">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCREEN 1 — LANDING -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="screen active" id="screen-0">
+  <div class="hero">
+    <div class="logo-hero">
+      <span class="logo-white">Share</span><span class="logo-orange">Con</span><span class="logo-white">Load</span>
+    </div>
+    <p class="hero-tagline">Share the Load. Connect the World.</p>
+    <h1 class="hero-headline">Monetise Your Container Space</h1>
+    <p class="hero-sub">Connect with verified shippers. Get paid in stages. Grow your freight network across Africa.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary btn-lg">Register as Operator</button>
+      <button class="btn btn-white-outline btn-lg">Log In</button>
+    </div>
+    <div class="hero-props">
+      <div class="hero-prop">
+        <span class="hero-prop-icon">📦</span>
+        <span class="hero-prop-label">List Spare<br>Capacity</span>
+      </div>
+      <div class="hero-prop">
+        <span class="hero-prop-icon">🔒</span>
+        <span class="hero-prop-label">Verified<br>Customers Only</span>
+      </div>
+      <div class="hero-prop">
+        <span class="hero-prop-icon">💳</span>
+        <span class="hero-prop-label">Staged Payout<br>Protection</span>
+      </div>
+    </div>
+    <div class="social-proof">
+      <span>47 active operators</span>
+      <span class="social-dot">·</span>
+      <span>R 2.4M paid out to date</span>
+      <span class="social-dot">·</span>
+      <span>98% on-time delivery</span>
+    </div>
+    <div class="hero-footer">VEYQON GROUP (Pty) Ltd · shareconload.com</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCREEN 2 — ONBOARDING -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="screen" id="screen-1">
+  <div class="section">
+    <h2 class="mb-4">Create Your Operator Account</h2>
+    <p class="text-grey mb-20">Join Africa's leading shared container logistics platform.</p>
+
+    <div class="onboard-layout">
+      <!-- Left: Form -->
+      <div>
+        <div class="tabs">
+          <div class="tab active">Company Details</div>
+          <div class="tab">Bank Account</div>
+        </div>
+
+        <!-- Tab 1: Company Details (active) -->
+        <div id="tab-company" class="card">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Company Name</label>
+              <input class="form-input" type="text" value="AfriShip Logistics (Pty) Ltd" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Name</label>
+              <input class="form-input" type="text" value="Thabo Mokoena" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input class="form-input" type="email" value="thabo@afrishiplogistics.co.za" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input class="form-input" type="text" value="+27 11 456 7890" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Country</label>
+              <input class="form-input" type="text" value="South Africa" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Operator Licence No.</label>
+              <input class="form-input" type="text" value="ZA-OPS-2024-00312" readonly />
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div style="background:#F0FFF4;border:1px solid #A3D9A5;border-radius:6px;padding:10px 14px;font-size:12px;color:#155724;margin-bottom:16px;">
+            ✅ All fields verified · Identity check will be completed within 48 hours
+          </div>
+          <button class="btn btn-primary btn-full btn-lg">Submit Application</button>
+        </div>
+
+        <!-- Tab 2: Bank Account (hidden preview) -->
+        <div id="tab-bank" class="card mt-12" style="display:none;">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Bank</label>
+              <input class="form-input" type="text" value="FNB Business" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Account Holder</label>
+              <input class="form-input" type="text" value="AfriShip Logistics (Pty) Ltd" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Account Number</label>
+              <input class="form-input" type="text" value="62847391052" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Branch Code</label>
+              <input class="form-input" type="text" value="250655" readonly />
+            </div>
+          </div>
+          <div class="divider"></div>
+          <p class="text-sm text-grey">Payouts processed within 2 business days of each payment stage.</p>
+          <div class="mt-12">
+            <button class="btn btn-primary btn-full btn-lg">Submit Application</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Benefits panel -->
+      <div>
+        <div class="benefits-panel">
+          <h3>Why join ShareConLoad?</h3>
+          <div class="benefit-row">
+            <span class="benefit-label">Avg. earnings per container</span>
+            <span class="benefit-value">R 28,000+</span>
+          </div>
+          <div class="benefit-row">
+            <span class="benefit-label">Active shippers</span>
+            <span class="benefit-value">340+</span>
+          </div>
+          <div class="benefit-row">
+            <span class="benefit-label">Platform commission</span>
+            <span class="benefit-value">5% only</span>
+          </div>
+          <div class="review-note">
+            Applications reviewed within 48 hours
+          </div>
+          <div style="margin-top:20px;">
+            <h4 style="color:rgba(255,255,255,0.55);margin-bottom:10px;font-size:11px;">WHAT OPERATORS SAY</h4>
+            <p style="font-size:12px;color:rgba(255,255,255,0.7);font-style:italic;line-height:1.6;">"We filled 80% of spare container space within the first month on ShareConLoad."</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:6px;">— Logistics Director, Cape Freight Solutions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCREEN 3 — POST A SHIPMENT LISTING -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="screen" id="screen-2">
+  <div class="section">
+    <h2 class="mb-4">Create a Container Listing</h2>
+    <p class="text-grey mb-20">Fill in the details below to publish your available container space to verified shippers.</p>
+
+    <div class="listing-layout">
+      <!-- Left: Form -->
+      <div class="card card-lg">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Origin Port</label>
+            <input class="form-input" type="text" value="Durban, South Africa" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Destination Port</label>
+            <input class="form-input" type="text" value="Tema, Ghana" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Vessel Name</label>
+            <input class="form-input" type="text" value="MV African Horizon" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Departure Date</label>
+            <input class="form-input" type="text" value="2026-07-15" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estimated Arrival</label>
+            <input class="form-input" type="text" value="2026-08-12" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Available Space (CBM)</label>
+            <input class="form-input" type="text" value="65" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Max Cargo Weight (kg)</label>
+            <input class="form-input" type="text" value="12,000" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Price per CBM (ZAR)</label>
+            <input class="form-input" type="text" value="R 2,800" readonly />
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h4 style="margin-bottom:12px;">Accepted Cargo Types</h4>
+        <div class="checkbox-grid">
+          <div class="checkbox-item">
+            <div class="checkbox-box checked">✓</div>
+            <span>Electronics</span>
+          </div>
+          <div class="checkbox-item">
+            <div class="checkbox-box checked">✓</div>
+            <span>Clothing &amp; Apparel</span>
+          </div>
+          <div class="checkbox-item">
+            <div class="checkbox-box checked">✓</div>
+            <span>Furniture</span>
+          </div>
+          <div class="checkbox-item">
+            <div class="checkbox-box checked">✓</div>
+            <span>Personal Effects</span>
+          </div>
+          <div class="checkbox-item">
+            <div class="checkbox-box unchecked"></div>
+            <span>Hazardous</span>
+          </div>
+          <div class="checkbox-item">
+            <div class="checkbox-box unchecked"></div>
+            <span>Perishables</span>
+          </div>
+          <div class="checkbox-item">
+            <div class="checkbox-box unchecked"></div>
+            <span>Vehicles</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="checkbox-item" style="background:#F0FFF4;border:1px solid #A3D9A5;padding:12px;border-radius:6px;">
+          <div class="checkbox-box checked">✓</div>
+          <span style="font-size:13px;">I confirm that cargo-in-transit insurance is active for this voyage.</span>
+        </div>
+
+        <div class="flex gap-12 mt-16">
+          <button class="btn btn-primary" style="flex:1;justify-content:center;">Publish Listing</button>
+          <button class="btn btn-outline" style="flex:1;justify-content:center;">Save Draft</button>
+        </div>
+      </div>
+
+      <!-- Right: Preview card -->
+      <div>
+        <p class="text-xs text-grey mb-8" style="text-transform:uppercase;font-weight:700;letter-spacing:0.06em;">Shipper Preview</p>
+        <div class="preview-card">
+          <div class="preview-header">
+            <div class="preview-route">Durban → Tema</div>
+            <div class="preview-vessel">MV African Horizon · AfriShip Logistics</div>
+          </div>
+          <div class="preview-body">
+            <div class="preview-row">
+              <span class="preview-key">Departure</span>
+              <span class="preview-val">15 Jul 2026</span>
+            </div>
+            <div class="preview-row">
+              <span class="preview-key">ETA</span>
+              <span class="preview-val">12 Aug 2026</span>
+            </div>
+            <div class="preview-row">
+              <span class="preview-key">Available</span>
+              <span class="preview-val">65 CBM</span>
+            </div>
+            <div class="preview-row">
+              <span class="preview-key">Price / CBM</span>
+              <span class="preview-val text-orange">R 2,800</span>
+            </div>
+            <div class="preview-row">
+              <span class="preview-key">Max Weight</span>
+              <span class="preview-val">12,000 kg</span>
+            </div>
+            <div class="divider"></div>
+            <div class="cargo-tags">
+              <span class="cargo-tag">Electronics</span>
+              <span class="cargo-tag">Clothing</span>
+              <span class="cargo-tag">Furniture</span>
+              <span class="cargo-tag">Personal Effects</span>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);">
+              <span>🛡️</span>
+              <span>Insurance Active</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:12px;background:#FFF8F0;border:1px solid var(--salmon);border-radius:6px;padding:10px 12px;">
+          <p style="font-size:11px;color:#7C3500;">This is how your listing will appear to shippers on the marketplace. Review before publishing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCREEN 4 — INCOMING BOOKING REQUEST -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="screen" id="screen-3">
+  <div class="section">
+    <h2 class="mb-16">Incoming Booking Request</h2>
+
+    <!-- Notification Banner -->
+    <div class="notif-banner">
+      <div class="notif-pulse"></div>
+      <span class="notif-banner-text">🔔 New Booking Request · SCL-2026-00847 · Just now</span>
+      <span class="badge badge-orange" style="margin-left:auto;">Action Required</span>
+    </div>
+
+    <!-- Customer Card -->
+    <div class="customer-card">
+      <div class="customer-avatar-lg">ND</div>
+      <div class="customer-info">
+        <h3>Nomvula Dlamini</h3>
+        <div class="customer-meta">
+          <span class="meta-chip">✅ Identity Verified</span>
+          <span class="meta-chip">⭐ 4.9/5 (12 trips)</span>
+          <span class="meta-chip">📅 Member since Jan 2025</span>
+        </div>
+      </div>
+      <div style="margin-left:auto;text-align:right;">
+        <span class="badge badge-green">Trusted Shipper</span>
+      </div>
+    </div>
+
+    <!-- Cargo + Financial -->
+    <div class="booking-grid">
+      <!-- Cargo Summary -->
+      <div class="card">
+        <h4 class="mb-12">Cargo Summary</h4>
+        <div class="preview-row">
+          <span class="preview-key">Route</span>
+          <span class="preview-val">Durban → Tema</span>
+        </div>
+        <div class="preview-row">
+          <span class="preview-key">Description</span>
+          <span class="preview-val">Samsung 65" Smart TVs (x5)</span>
+        </div>
+        <div class="preview-row">
+          <span class="preview-key">Category</span>
+          <span class="preview-val">Electronics</span>
+        </div>
+        <div class="preview-row">
+          <span class="preview-key">Weight</span>
+          <span class="preview-val">125 kg</span>
+        </div>
+        <div class="preview-row">
+          <span class="preview-key">Volume</span>
+          <span class="preview-val">3.5 CBM</span>
+        </div>
+        <div class="preview-row">
+          <span class="preview-key">Declared Value</span>
+          <span class="preview-val">R 42,500</span>
+        </div>
+        <div class="cargo-photos">
+          <div class="photo-thumb">🖼</div>
+          <div class="photo-thumb">🖼</div>
+        </div>
+      </div>
+
+      <!-- Financial Summary -->
+      <div class="card">
+        <h4 class="mb-12">Financial Summary</h4>
+        <div class="preview-row">
+          <span class="preview-key">Contract Total</span>
+          <span class="preview-val font-800 text-navy" style="font-size:17px;">R 10,290</span>
+        </div>
+        <div class="preview-row">
+          <span class="preview-key">Stage 1 Deposit (20%)</span>
+          <span class="preview-val">R 2,058</span>
+        </div>
+        <div class="preview-row">
+          <span class="preview-key">Platform Commission</span>
+          <span class="preview-val text-grey">– R 515</span>
+        </div>
+        <div style="background:#F0FFF4;border:1px solid #A3D9A5;border-radius:6px;padding:12px;margin-top:12px;">
+          <div class="flex-between">
+            <span style="font-size:13px;font-weight:700;color:#155724;">Your Net Earnings</span>
+            <span style="font-size:20px;font-weight:800;color:#155724;">R 9,775</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="font-size:12px;color:var(--grey-600);line-height:1.5;">
+          💳 Stage 1 deposit payable within 24h of acceptance. Payout released per milestone.
+        </div>
+      </div>
+    </div>
+
+    <!-- Accept / Decline -->
+    <div class="accept-row">
+      <button class="btn btn-primary btn-lg" style="flex:2;justify-content:center;">✓ Accept Booking</button>
+      <button class="btn btn-red-outline btn-lg" style="flex:1;justify-content:center;">✗ Decline</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCREEN 5 — OPERATOR DASHBOARD -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="screen" id="screen-4">
+  <div class="section">
+    <div class="flex-between mb-20">
+      <div>
+        <h2>Operator Dashboard</h2>
+        <p class="text-sm text-grey mt-4">AfriShip Logistics (Pty) Ltd · Thabo Mokoena</p>
+      </div>
+      <span class="badge badge-green">✅ Verified Operator</span>
+    </div>
+
+    <!-- KPI Tiles -->
+    <div class="kpi-grid">
+      <div class="kpi-tile">
+        <div class="kpi-label">Active Bookings</div>
+        <div class="kpi-value">3</div>
+        <div class="kpi-sub">This voyage</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="kpi-label">CBM Utilised</div>
+        <div class="kpi-value">24 <span style="font-size:14px;font-weight:500;color:var(--grey-400);">/ 65</span></div>
+        <div class="kpi-sub">37% capacity used</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="kpi-label">Revenue This Month</div>
+        <div class="kpi-value" style="font-size:18px;">R 19,200</div>
+        <div class="kpi-sub trend-up">↑ +12% vs last month</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="kpi-label">Pending Payouts</div>
+        <div class="kpi-value text-orange" style="font-size:18px;">R 14,760</div>
+        <div class="kpi-sub pulse" style="display:inline-block;">● Stage 2 due soon</div>
+      </div>
+    </div>
+
+    <!-- Active Shipments Table -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div style="padding:16px 20px;border-bottom:1px solid var(--grey-200);">
+        <h3>Active Shipments</h3>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Booking Ref</th>
+              <th>Customer</th>
+              <th>Route</th>
+              <th>CBM</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td><strong>SCL-2026-00847</strong></td>
+              <td>
+                <div>Nomvula Dlamini</div>
+                <div class="text-xs text-grey">⭐ 4.9 · 12 trips</div>
+              </td>
+              <td>Durban → Tema</td>
+              <td>3.5</td>
+              <td>
+                <div class="status-badge">
+                  <div class="status-dot" style="background:#F59E0B;"></div>
+                  <span style="color:#92400E;font-weight:600;">Awaiting Departure</span>
+                </div>
+              </td>
+              <td><button class="btn btn-primary btn-sm">Update Status</button></td>
+            </tr>
+            <tr>
+              <td><strong>SCL-2026-00831</strong></td>
+              <td>
+                <div>Sipho Nkosi</div>
+                <div class="text-xs text-grey">⭐ 4.7 · 8 trips</div>
+              </td>
+              <td>Durban → Tema</td>
+              <td>8.0</td>
+              <td>
+                <div class="status-badge">
+                  <div class="status-dot" style="background:var(--blue);"></div>
+                  <span style="color:var(--blue);font-weight:600;">In Transit</span>
+                </div>
+              </td>
+              <td><button class="btn btn-outline btn-sm">View Details</button></td>
+            </tr>
+            <tr>
+              <td><strong>SCL-2026-00819</strong></td>
+              <td>
+                <div>Fatima Al-Hassan</div>
+                <div class="text-xs text-grey">⭐ 5.0 · 19 trips</div>
+              </td>
+              <td>Durban → Accra</td>
+              <td>12.5</td>
+              <td>
+                <div class="status-badge">
+                  <div class="status-dot" style="background:var(--green);"></div>
+                  <span style="color:var(--green);font-weight:600;">Delivered</span>
+                </div>
+              </td>
+              <td><button class="btn btn-primary btn-sm">Release Cargo</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Payout Summary -->
+    <div class="payout-summary-card">
+      <h3>Payout Summary · MV African Horizon</h3>
+      <div class="payout-row">
+        <span class="payout-stage-label">Stage 1 — Deposit (20%)</span>
+        <span class="payout-amount" style="color:#4ADE80;">R 3,840 ✓ Received</span>
+      </div>
+      <div class="payout-row">
+        <span class="payout-stage-label">Stage 2 — Pre-Departure (50%)</span>
+        <span class="payout-amount pulse text-orange">R 9,600 ⏳ Pending</span>
+      </div>
+      <div class="payout-row">
+        <span class="payout-stage-label">Stage 3 — Final Release (30%)</span>
+        <span class="payout-amount" style="color:rgba(255,255,255,0.35);">R 5,760 🔒 Locked</span>
+      </div>
+      <div class="divider" style="border-color:rgba(255,255,255,0.12);margin:12px 0;"></div>
+      <div class="flex-between">
+        <span style="font-size:13px;color:rgba(255,255,255,0.65);">Total Contract Value</span>
+        <span style="font-size:18px;font-weight:800;color:var(--white);">R 19,200</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCREEN 6 — MESSAGES -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="screen" id="screen-5">
+  <div class="section">
+    <!-- Header -->
+    <div class="messages-header mb-4">
+      <button class="back-btn">←</button>
+      <h2>Messages · SCL-2026-00847</h2>
+    </div>
+    <p class="text-sm text-grey mb-12">Nomvula Dlamini · Durban → Tema · <span style="color:var(--blue);font-weight:600;">In Transit</span></p>
+
+    <!-- Customer meta strip -->
+    <div class="chat-meta-strip mb-12">
+      <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--orange));color:white;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">ND</div>
+      <span>⭐ 4.9</span>
+      <span style="color:var(--grey-300);">·</span>
+      <span>Electronics</span>
+      <span style="color:var(--grey-300);">·</span>
+      <span>3.5 CBM</span>
+      <span style="color:var(--grey-300);">·</span>
+      <span>✅ Identity Verified</span>
+      <span style="margin-left:auto;" class="badge badge-orange">Active Booking</span>
+    </div>
+
+    <!-- Chat container -->
+    <div class="chat-container">
+      <div class="chat-thread" style="padding:16px;">
+
+        <!-- Message 1 — RIGHT (You) -->
+        <div class="bubble-row right">
+          <div>
+            <div style="text-align:right;margin-bottom:3px;" class="text-xs text-grey">You · Thabo Mokoena</div>
+            <div class="bubble bubble-right">Hi Nomvula, just confirming your cargo has been loaded successfully at Durban Port. Vessel departs tomorrow at 06:00.
+              <span class="bubble-time">15 Jul 2026, 14:32</span>
+            </div>
+          </div>
+          <div class="bubble-avatar avatar-navy">TM</div>
+        </div>
+
+        <!-- Message 2 — LEFT (Nomvula) -->
+        <div class="bubble-row">
+          <div class="bubble-avatar avatar-grey">ND</div>
+          <div>
+            <div class="bubble-sender">Nomvula Dlamini</div>
+            <div class="bubble bubble-left">Thank you! Can you confirm the estimated arrival date at Tema Port?
+              <span class="bubble-time">15 Jul 2026, 15:10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message 3 — RIGHT (You) -->
+        <div class="bubble-row right">
+          <div>
+            <div style="text-align:right;margin-bottom:3px;" class="text-xs text-grey">You · Thabo Mokoena</div>
+            <div class="bubble bubble-right">Estimated arrival is 12 Aug 2026, subject to port conditions. We'll notify you 48 hours before arrival.
+              <span class="bubble-time">15 Jul 2026, 15:45</span>
+            </div>
+          </div>
+          <div class="bubble-avatar avatar-navy">TM</div>
+        </div>
+
+        <!-- Message 4 — LEFT (Nomvula) -->
+        <div class="bubble-row">
+          <div class="bubble-avatar avatar-grey">ND</div>
+          <div>
+            <div class="bubble-sender">Nomvula Dlamini</div>
+            <div class="bubble bubble-left">Perfect, thank you for the update 🙏
+              <span class="bubble-time">15 Jul 2026, 16:02</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message 5 — LEFT unread (Nomvula) with NEW badge -->
+        <div class="bubble-row">
+          <div class="bubble-avatar avatar-grey">ND</div>
+          <div>
+            <div class="bubble-sender" style="display:flex;align-items:center;">Nomvula Dlamini <span class="new-badge">NEW</span></div>
+            <div class="bubble bubble-left" style="border:1.5px solid var(--orange);">Hi, just checking — has the vessel cleared Cape waters? Any updates on position?
+              <span class="bubble-time">22 Jul 2026, 08:47</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Input bar -->
+      <div class="chat-input-bar">
+        <input class="chat-input" type="text" placeholder="Type a message..." />
+        <button class="btn btn-primary" style="border-radius:20px;padding:10px 20px;">Send</button>
+      </div>
+
+      <div class="compliance-note">
+        Messages are monitored for compliance. Do not share payment or personal details outside the platform.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCREEN 7 — PAYOUT TRACKER -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="screen" id="screen-6">
+  <div class="section">
+    <div class="flex-between mb-20">
+      <div>
+        <h2>Payout Tracker</h2>
+        <p class="text-sm text-grey mt-4">AfriShip Logistics (Pty) Ltd · SCL-2026-00847</p>
+      </div>
+      <span class="badge badge-orange">Stage 2 In Progress</span>
+    </div>
+
+    <!-- 3-Stage Visual Payout Bar -->
+    <div class="card mb-20" style="padding:24px;">
+      <h4 class="mb-16">Payment Milestone Tracker — SCL-2026-00847</h4>
+      <div style="display:flex;align-items:stretch;gap:0;">
+        <!-- Stage 1 -->
+        <div class="payout-stage green" style="flex:2;">
+          <div style="font-size:11px;font-weight:700;color:var(--grey-600);text-transform:uppercase;margin-bottom:6px;">Stage 1 — 20%</div>
+          <div style="font-size:20px;font-weight:800;color:var(--green);">R 2,058</div>
+          <div style="margin-top:6px;font-size:13px;color:var(--green);font-weight:700;">✓ RECEIVED</div>
+          <div style="font-size:11px;color:var(--grey-600);margin-top:4px;">Deposit · Paid 28 May</div>
+        </div>
+        <!-- Connector -->
+        <div style="width:3px;background:var(--green);align-self:stretch;flex-shrink:0;"></div>
+        <!-- Stage 2 -->
+        <div class="payout-stage orange" style="flex:5;">
+          <div style="font-size:11px;font-weight:700;color:var(--grey-600);text-transform:uppercase;margin-bottom:6px;">Stage 2 — 50%</div>
+          <div style="font-size:20px;font-weight:800;color:var(--orange);">R 5,145</div>
+          <div class="pulse" style="margin-top:6px;font-size:13px;color:var(--orange);font-weight:700;">⏳ PENDING</div>
+          <div style="font-size:11px;color:var(--grey-600);margin-top:4px;">Pre-Departure · Awaiting customer payment</div>
+        </div>
+        <!-- Connector -->
+        <div style="width:3px;background:var(--grey-300);align-self:stretch;flex-shrink:0;"></div>
+        <!-- Stage 3 -->
+        <div class="payout-stage grey" style="flex:3;">
+          <div style="font-size:11px;font-weight:700;color:var(--grey-600);text-transform:uppercase;margin-bottom:6px;">Stage 3 — 30%</div>
+          <div style="font-size:20px;font-weight:800;color:var(--grey-400);">R 3,087</div>
+          <div style="margin-top:6px;font-size:13px;color:var(--grey-400);font-weight:700;">🔒 LOCKED</div>
+          <div style="font-size:11px;color:var(--grey-600);margin-top:4px;">Final Release · After delivery</div>
+        </div>
+      </div>
+      <div class="flex-between mt-16" style="padding-top:12px;border-top:1px solid var(--grey-200);">
+        <span style="font-size:13px;color:var(--grey-600);">Total Contract Value</span>
+        <span style="font-size:18px;font-weight:800;color:var(--navy);">R 10,290</span>
+      </div>
+    </div>
+
+    <!-- Balance Card -->
+    <div class="balance-card mb-20">
+      <div class="balance-left">
+        <h4>Available Balance</h4>
+        <div class="balance-amount">R 3,840</div>
+        <div class="balance-pending">Pending: R 14,760</div>
+      </div>
+      <div style="position:relative;">
+        <button class="btn btn-grey" style="cursor:not-allowed;opacity:0.7;" title="Awaiting Stage 2 payment">Withdraw Funds</button>
+        <div style="position:absolute;bottom:-22px;right:0;font-size:10px;color:rgba(255,255,255,0.5);white-space:nowrap;">Awaiting Stage 2 payment</div>
+      </div>
+    </div>
+
+    <!-- All Bookings Payout Summary -->
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:20px;">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--grey-200);">
+        <h3>All Bookings · Payout Summary</h3>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Booking</th>
+              <th>Stage 1 (20%)</th>
+              <th>Stage 2 (50%)</th>
+              <th>Stage 3 (30%)</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td><strong>SCL-2026-00847</strong></td>
+              <td style="color:var(--green);font-weight:700;">R 2,058 ✓</td>
+              <td><span class="pulse" style="color:var(--orange);font-weight:700;">R 5,145 ⏳</span></td>
+              <td style="color:var(--grey-400);">R 3,087 🔒</td>
+              <td><strong>R 10,290</strong></td>
+            </tr>
+            <tr>
+              <td><strong>SCL-2026-00831</strong></td>
+              <td style="color:var(--green);font-weight:700;">R 1,470 ✓</td>
+              <td><span class="pulse" style="color:var(--orange);font-weight:700;">R 3,675 ⏳</span></td>
+              <td style="color:var(--grey-400);">R 2,205 🔒</td>
+              <td><strong>R 7,350</strong></td>
+            </tr>
+            <tr>
+              <td><strong>SCL-2026-00819</strong></td>
+              <td style="color:var(--green);font-weight:700;">R 2,058 ✓</td>
+              <td style="color:var(--green);font-weight:700;">R 5,145 ✓</td>
+              <td><span class="pulse" style="color:var(--orange);font-weight:700;">R 3,087 ⏳</span></td>
+              <td><strong>R 10,290</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="card">
+      <h4 class="mb-12">Recent Transactions</h4>
+      <div class="transaction-list">
+        <div class="txn-row">
+          <span class="txn-date">28 May 2026</span>
+          <span>Stage 1 Deposit — SCL-2026-00847</span>
+          <span class="txn-amount-pos">+ R 2,058</span>
+        </div>
+        <div class="txn-row">
+          <span class="txn-date">14 May 2026</span>
+          <span>Stage 1 Deposit — SCL-2026-00831</span>
+          <span class="txn-amount-pos">+ R 1,470</span>
+        </div>
+        <div class="txn-row">
+          <span class="txn-date">1 May 2026</span>
+          <span>Stage 1 Deposit — SCL-2026-00819</span>
+          <span class="txn-amount-pos">+ R 2,058</span>
+        </div>
+        <div class="txn-row">
+          <span class="txn-date">30 Apr 2026</span>
+          <span>Platform fee — April</span>
+          <span class="txn-amount-neg">– R 515</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCREEN 8 — PERFORMANCE & RATINGS -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="screen" id="screen-7">
+  <div class="section">
+    <div class="flex-between mb-20">
+      <div>
+        <h2>Performance</h2>
+        <p class="text-sm text-grey mt-4">AfriShip Logistics (Pty) Ltd</p>
+      </div>
+    </div>
+
+    <!-- Verified Operator Card -->
+    <div class="verified-card mb-20">
+      <div class="verified-left">
+        <div class="verified-icon">✅</div>
+        <div>
+          <h3>Verified Operator</h3>
+          <div class="verified-sub">Active since January 2024 · 47 completed shipments</div>
+        </div>
+      </div>
+      <span class="preferred-pill">PREFERRED</span>
+    </div>
+
+    <!-- 3 Primary KPI Tiles -->
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:14px;">
+      <div class="kpi-tile" style="text-align:center;">
+        <div class="kpi-label">Completion Rate</div>
+        <div class="kpi-value" style="font-size:28px;">98%</div>
+        <div class="kpi-sub trend-up">↑ Above platform avg</div>
+      </div>
+      <div class="kpi-tile" style="text-align:center;">
+        <div class="kpi-label">On-Time Departures</div>
+        <div class="kpi-value" style="font-size:28px;">95%</div>
+        <div class="kpi-sub trend-up">↑ Top 10% of operators</div>
+      </div>
+      <div class="kpi-tile" style="text-align:center;">
+        <div class="kpi-label">Customer Rating</div>
+        <div class="kpi-value" style="font-size:28px;">4.8 <span class="stars">⭐</span></div>
+        <div class="kpi-sub">Based on 43 reviews</div>
+      </div>
+    </div>
+
+    <!-- 4 Secondary Metrics -->
+    <div class="perf-grid-4 mb-20">
+      <div class="perf-tile">
+        <div class="perf-tile-val">1,240</div>
+        <div class="perf-tile-label">Total CBM Shipped</div>
+      </div>
+      <div class="perf-tile">
+        <div class="perf-tile-val">1.4 hrs</div>
+        <div class="perf-tile-label">Avg Response Time</div>
+      </div>
+      <div class="perf-tile">
+        <div class="perf-tile-val">0.2%</div>
+        <div class="perf-tile-label">Dispute Rate</div>
+      </div>
+      <div class="perf-tile">
+        <div class="perf-tile-val">68%</div>
+        <div class="perf-tile-label">Repeat Customers</div>
+      </div>
+    </div>
+
+    <!-- Review Cards -->
+    <h4 class="mb-12">Recent Customer Reviews</h4>
+    <div class="review-cards mb-12">
+      <div class="review-card">
+        <div class="stars mb-8">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Cargo arrived on time and in perfect condition."</p>
+        <div class="review-meta">
+          <span class="review-author">Nomvula D.</span>
+          <span class="review-date">12 Aug 2026</span>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars mb-8">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Professional team, clear communication throughout."</p>
+        <div class="review-meta">
+          <span class="review-author">Sipho N.</span>
+          <span class="review-date">30 Jul 2026</span>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars mb-8">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Smooth process from booking to delivery."</p>
+        <div class="review-meta">
+          <span class="review-author">Fatima A.</span>
+          <span class="review-date">15 Jun 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="#" style="color:var(--orange);font-size:14px;font-weight:600;text-decoration:none;">View Full Performance Report →</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- end #viewport -->
+
+<!-- NAV BUTTONS -->
+<div id="nav-btns">
+  <button class="btn btn-outline" id="btn-back" onclick="navigate(-1)">← Back</button>
+  <div style="text-align:center;font-size:12px;color:var(--grey-400);">
+    Use arrow keys or buttons to navigate
+  </div>
+  <button class="btn btn-primary" id="btn-next" onclick="navigate(1)">Next →</button>
+</div>
+
+<!-- DEMO MODE WATERMARK -->
+<div id="watermark">DEMO MODE</div>
+
+<script>
+const SCREENS = [
+  { name: 'Landing',         backLabel: '← Back',           nextLabel: 'Next →' },
+  { name: 'Onboarding',      backLabel: '← Landing',        nextLabel: 'Next →' },
+  { name: 'List Shipment',   backLabel: '← Onboarding',     nextLabel: 'Next →' },
+  { name: 'Booking Request', backLabel: '← List Shipment',  nextLabel: 'Next →' },
+  { name: 'Dashboard',       backLabel: '← Booking Request',nextLabel: 'Next →' },
+  { name: 'Messages',        backLabel: '← Dashboard',      nextLabel: 'Next →' },
+  { name: 'Payout Tracker',  backLabel: '← Messages',       nextLabel: 'Next →' },
+  { name: 'Performance',     backLabel: '← Payout Tracker', nextLabel: '↺ Restart Demo' },
+];
+
+let current = 0;
+let isAnimating = false;
+
+function updateUI() {
+  const total = SCREENS.length;
+  const idx = current;
+  const pct = Math.round(((idx + 1) / total) * 100);
+
+  document.getElementById('step-label').textContent = `Step ${idx + 1} of ${total} — ${SCREENS[idx].name}`;
+  document.getElementById('step-pct').textContent = `${pct}%`;
+  document.getElementById('progress-fill').style.width = `${pct}%`;
+
+  document.getElementById('btn-back').textContent = SCREENS[idx].backLabel;
+  document.getElementById('btn-back').disabled = idx === 0;
+  document.getElementById('btn-next').textContent = SCREENS[idx].nextLabel;
+
+  // Dots
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((dot, i) => {
+    dot.classList.remove('active', 'visited');
+    if (i === idx) dot.classList.add('active');
+    else if (i < idx) dot.classList.add('visited');
+  });
+}
+
+function goTo(target) {
+  if (isAnimating) return;
+  if (target === current) return;
+  if (target < 0 || target >= SCREENS.length) return;
+
+  isAnimating = true;
+  const direction = target > current ? 1 : -1;
+  const fromScreen = document.getElementById(`screen-${current}`);
+  const toScreen = document.getElementById(`screen-${target}`);
+
+  // Set up "to" screen off-screen
+  toScreen.style.transition = 'none';
+  toScreen.style.transform = `translateX(${direction * 100}%)`;
+  toScreen.style.opacity = '0';
+  toScreen.style.position = 'absolute';
+  toScreen.style.top = '0';
+  toScreen.style.left = '0';
+  toScreen.style.right = '0';
+  toScreen.style.pointerEvents = 'none';
+
+  // Force reflow
+  toScreen.getBoundingClientRect();
+
+  // Start transitions
+  toScreen.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
+  fromScreen.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease';
+
+  toScreen.style.transform = 'translateX(0)';
+  toScreen.style.opacity = '1';
+  fromScreen.style.transform = `translateX(${-direction * 100}%)`;
+  fromScreen.style.opacity = '0';
+
+  current = target;
+  updateUI();
+
+  setTimeout(() => {
+    // Reset from screen
+    fromScreen.classList.remove('active');
+    fromScreen.style.transition = '';
+    fromScreen.style.transform = '';
+    fromScreen.style.opacity = '';
+    fromScreen.style.position = '';
+    fromScreen.style.top = '';
+    fromScreen.style.left = '';
+    fromScreen.style.right = '';
+    fromScreen.style.pointerEvents = '';
+
+    // Activate to screen
+    toScreen.classList.add('active');
+    toScreen.style.transition = '';
+    toScreen.style.transform = '';
+    toScreen.style.opacity = '';
+    toScreen.style.position = '';
+    toScreen.style.top = '';
+    toScreen.style.left = '';
+    toScreen.style.right = '';
+    toScreen.style.pointerEvents = '';
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    isAnimating = false;
+  }, 420);
+}
+
+function navigate(dir) {
+  if (dir === 1 && current === SCREENS.length - 1) {
+    goTo(0); // Restart
+    return;
+  }
+  if (dir === -1 && current === 0) return;
+  goTo(current + dir);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate(-1);
+});
+
+// Screen 2 tab switching
+const tabs = document.querySelectorAll('.tab');
+if (tabs.length >= 2) {
+  tabs[0].addEventListener('click', () => {
+    tabs[0].classList.add('active');
+    tabs[1].classList.remove('active');
+    document.getElementById('tab-company').style.display = '';
+    document.getElementById('tab-bank').style.display = 'none';
+  });
+  tabs[1].addEventListener('click', () => {
+    tabs[1].classList.add('active');
+    tabs[0].classList.remove('active');
+    document.getElementById('tab-company').style.display = 'none';
+    document.getElementById('tab-bank').style.display = '';
+  });
+}
+
+// Init
+updateUI();
+</script>
+
+</body>
+</html>
