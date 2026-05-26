@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import {
   TrendingUp, Zap, ShieldCheck, Globe, Award, Eye, Users, AlertTriangle,
   ArrowRight, Check, X, Phone, Truck, EyeOff, AlertCircle, BadgeCheck, Building2,
@@ -8,11 +9,11 @@ import { GoldIcon } from '@/components/ui/GoldIcon'
 import { CharterForm } from '@/components/forms/CharterForm'
 
 export const metadata: Metadata = {
-  title: "ShareConLoad — Global Freight Network | VeyQon Group",
+  title: "ShareConLoad | Global Freight Network | VeyQon Group",
   description:
-    'A digital freight marketplace connecting container operators with verified cargo owners worldwide. Apply for Charter Membership — only 20 founding operators.',
+    'A digital logistics marketplace connecting cargo owners with transport operators. Apply for Charter Membership. Only 20 founding operator spots available.',
   openGraph: {
-    title: "ShareConLoad — Global Freight Network | VeyQon Group",
+    title: "ShareConLoad | Global Freight Network | VeyQon Group",
     description:
       'A digital freight marketplace connecting container operators with verified cargo owners worldwide.',
     type: 'website',
@@ -39,7 +40,7 @@ const problems = [
   {
     icon: Phone,
     title: 'Endless Calls',
-    desc: 'Operators rely on phone and WhatsApp chains to source cargo — slow, unreliable, and unscalable.',
+    desc: 'Operators rely on phone and WhatsApp chains to source cargo. The process is slow, unreliable, and unscalable.',
   },
   {
     icon: Truck,
@@ -49,12 +50,12 @@ const problems = [
   {
     icon: EyeOff,
     title: 'Zero Visibility',
-    desc: 'No network-wide view of available container space across routes — decisions made blind.',
+    desc: 'No network-wide view of available container space across routes. Decisions are made blind.',
   },
   {
     icon: AlertCircle,
     title: 'Payment Risk',
-    desc: 'No structured payment protection across informal operator arrangements — exposure at every transaction.',
+    desc: 'No structured payment protection across informal operator arrangements. Operators face exposure at every transaction.',
   },
 ]
 
@@ -73,7 +74,7 @@ const audience = [
     points: [
       'Find available container space on your required route',
       'Transparent pricing from verified, vetted operators',
-      'Digital coordination — no brokers, no middlemen',
+      'Direct digital coordination, no brokers, no middlemen',
       'Access to capacity across global trade routes',
     ],
   },
@@ -93,7 +94,7 @@ const steps = [
   {
     n: '03',
     label: 'Move Goods Smarter',
-    desc: 'Execute shipments with full digital coordination — no calls, no delays, no friction.',
+    desc: 'Execute shipments with full digital coordination. No calls, no delays, no friction.',
   },
 ]
 
@@ -287,7 +288,54 @@ export default function ShareConLoadPage() {
         </div>
       </section>
 
-      {/* ── 6. TRUST SIGNALS ── */}
+      {/* ── 6. PLATFORM WALKTHROUGH ── */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <div className="mb-10 text-center">
+            <SectionHeading eyebrow="See It in Action" heading="Explore the Platform" centered />
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {[
+              {
+                href: '/demo/operator',
+                role: 'Operator',
+                title: 'Operator Walkthrough',
+                desc: 'See how transport operators list container space, manage bookings, and track payouts.',
+              },
+              {
+                href: '/demo/shipper',
+                role: 'Shipper',
+                title: 'Shipper Walkthrough',
+                desc: 'See how cargo owners find available space, book a slot, and follow their shipment.',
+              },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="card bg-base-200 border border-base-300 hover:border-primary/50 transition-colors p-8 space-y-4 group"
+              >
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-base-300 text-neutral">
+                  {item.role}
+                </span>
+                <div>
+                  <h3 className="font-bold text-lg text-base-content group-hover:text-primary transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-neutral text-sm mt-1 leading-relaxed">{item.desc}</p>
+                </div>
+                <div className="flex items-center gap-1.5 text-primary text-sm font-semibold">
+                  View walkthrough
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. TRUST SIGNALS ── */}
       <section className="py-14 border-b border-base-300">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -304,7 +352,7 @@ export default function ShareConLoadPage() {
         </div>
       </section>
 
-      {/* ── 7. CHARTER MEMBER PROGRAMME ── */}
+      {/* ── 9. CHARTER MEMBER PROGRAMME ── */}
       <section id="charter" className="py-20 md:py-32 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
@@ -363,7 +411,7 @@ export default function ShareConLoadPage() {
         </div>
       </section>
 
-      {/* ── 8. TAGS ── */}
+      {/* ── 10. TAGS ── */}
       <section className="py-8 border-t border-base-300">
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-wrap gap-2">
           {tags.map((tag) => (

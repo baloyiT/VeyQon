@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Operator Demo — ShareConLoad | VeyQon Group',
+  title: 'Operator Walkthrough | ShareConLoad | VeyQon Group',
   description:
-    'Interactive demo of the ShareConLoad operator experience — list container space, manage bookings, and track payouts.',
+    'Interactive walkthrough of the ShareConLoad operator experience. List container space, manage bookings, and track payouts.',
 }
 
 export default function OperatorDemoPage() {

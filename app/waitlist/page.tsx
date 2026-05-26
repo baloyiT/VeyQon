@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Join the Waitlist — ShareConLoad by VeyQon Group',
+  title: 'Join the Waitlist | ShareConLoad by VeyQon Group',
   description:
     'Secure your early access to ShareConLoad, a digital logistics marketplace connecting cargo owners with transport operators to optimise shared container space.',
 }

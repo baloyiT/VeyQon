@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Pricing — ShareConLoad',
-  description: 'Transparent pricing structure for the ShareConLoad logistics marketplace — shipper payment stages and operator commission tiers.',
+  title: 'Pricing | ShareConLoad',
+  description: 'Transparent pricing structure for the ShareConLoad logistics marketplace covering shipper payment stages and operator commission tiers.',
 }
 
 export default function PricingPage() {
@@ -48,7 +48,7 @@ export default function PricingPage() {
             </h2>
             <p className="text-sm text-neutral mb-6">
               Each operator sets their own price per CBM (cubic metre) on their container listing. You
-              pay only for the exact space your cargo occupies — no whole-container commitment required.
+              pay only for the exact space your cargo occupies. No whole-container commitment required.
               Your total cost is calculated as:
             </p>
 
@@ -59,26 +59,26 @@ export default function PricingPage() {
             <h3 className="text-sm font-bold text-base-content mb-2">Payment stages</h3>
             <p className="text-sm text-neutral mb-5">
               Your total is never charged at once. It is split into three stages tied to shipment
-              milestones — so your money moves only as the shipment progresses.
+              milestones, so your money moves only as the shipment progresses.
             </p>
 
             <div className="space-y-3 mb-8">
               {[
                 {
                   pct: '20%',
-                  label: 'Deposit — paid at booking',
+                  label: 'Deposit, paid at booking',
                   detail: 'Secures your space immediately. Refundable within 48 hours of booking confirmation. Non-refundable after that window.',
                   highlight: true,
                 },
                 {
                   pct: '50%',
-                  label: 'Pre-Departure — due 7 days before sailing',
+                  label: 'Pre-Departure, due 7 days before sailing',
                   detail: 'Required before the container departs the origin port. Booking may be cancelled if not paid in time.',
                   highlight: false,
                 },
                 {
                   pct: '30%',
-                  label: 'Final Release — paid at destination',
+                  label: 'Final Release, paid at destination',
                   detail: 'Due before cargo is released to you at the destination. Cargo is held until this stage is cleared.',
                   highlight: false,
                 },
@@ -123,7 +123,7 @@ export default function PricingPage() {
             </h2>
             <p className="text-sm text-neutral mb-6">
               Operators set their own price per CBM and keep the majority of every booking.
-              ShareConLoad charges a tiered commission on each payout stage — the rate decreases
+              ShareConLoad charges a tiered commission on each payout stage. The rate decreases
               automatically as shipment value grows.
             </p>
 

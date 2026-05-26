@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'ShareConLoad Policies — VeyQon Group',
-  description: 'Legal policies for the ShareConLoad logistics marketplace platform — privacy, terms, cancellation, and pricing.',
+  title: 'ShareConLoad Policies | VeyQon Group',
+  description: 'Legal policies for the ShareConLoad logistics marketplace platform including privacy, terms, cancellation, and pricing.',
 }
 
 const policies = [

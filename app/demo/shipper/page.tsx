@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Shipper Demo — ShareConLoad | VeyQon Group',
+  title: 'Shipper Walkthrough | ShareConLoad | VeyQon Group',
   description:
-    'Interactive demo of the ShareConLoad shipper experience — find container space, book a slot, and track your shipment.',
+    'Interactive walkthrough of the ShareConLoad shipper experience. Find container space, book a slot, and track your shipment.',
 }
 
 export default function ShipperDemoPage() {

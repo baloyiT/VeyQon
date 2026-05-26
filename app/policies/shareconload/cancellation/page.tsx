@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Cancellation & Refund Policy — ShareConLoad',
+  title: 'Cancellation and Refund Policy | ShareConLoad',
   description: 'Cancellation and Refund Policy for the ShareConLoad logistics marketplace platform operated by VEYQON GROUP (Pty) Ltd.',
 }
 
@@ -104,7 +104,7 @@ export default function CancellationPolicyPage() {
                   <tbody className="divide-y divide-base-300 text-neutral">
                     <tr><td className="px-4 py-3">Within 48 hrs of booking</td><td className="px-4 py-3">20% Deposit</td><td className="px-4 py-3">May be refunded · Service fees non-refundable</td></tr>
                     <tr><td className="px-4 py-3">After 48 hrs of booking</td><td className="px-4 py-3">20% Deposit</td><td className="px-4 py-3">Non-refundable · Service fees non-refundable</td></tr>
-                    <tr><td className="px-4 py-3">After 2nd payment (pre-departure)</td><td className="px-4 py-3">50% payment</td><td className="px-4 py-3">Partial — subject to review · Deposit &amp; service fees non-refundable</td></tr>
+                    <tr><td className="px-4 py-3">After 2nd payment (pre-departure)</td><td className="px-4 py-3">50% payment</td><td className="px-4 py-3">Partial refund subject to review. Deposit and service fees non-refundable.</td></tr>
                     <tr><td className="px-4 py-3">After vessel departure</td><td className="px-4 py-3">All payments</td><td className="px-4 py-3">Non-refundable · Booking fully non-refundable</td></tr>
                     <tr><td className="px-4 py-3">After cargo arrival/release</td><td className="px-4 py-3">All payments</td><td className="px-4 py-3">Non-refundable · Shipment deemed completed</td></tr>
                   </tbody>

@@ -6,7 +6,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { GoldIcon } from '@/components/ui/GoldIcon'
 
 export const metadata: Metadata = {
-  title: 'About — VeyQon Group',
+  title: 'About | VeyQon Group',
   description:
     'VeyQon is a South African technology company developing modern digital platforms and intelligent business solutions across logistics, transport, and enterprise operations.',
 }
@@ -54,12 +54,12 @@ export default function AboutPage() {
               We build scalable products that improve operational efficiency, connectivity, and
               access within sectors such as logistics, transport, and enterprise operations. Our
               platforms are designed for the real constraints and commercial dynamics of the
-              markets we serve — not a hypothetical version of them.
+              markets we serve, not a hypothetical version of them.
             </p>
             <p>
-              Our approach is straightforward: identify where fragmented systems, manual
-              coordination, and poor visibility are costing businesses time and money — then build
-              the digital infrastructure to solve it with precision and reliability.
+              Our approach is straightforward: find where fragmented systems, manual processes,
+              and poor visibility are limiting businesses, then build the platform that removes
+              those limits.
             </p>
             <p>
               VeyQon's first platform is ShareConLoad, a digital logistics marketplace connecting
@@ -82,7 +82,7 @@ export default function AboutPage() {
               },
               {
                 label: 'Mission',
-                text: 'To deliver innovative, reliable, and scalable solutions that solve real business problems with excellence and integrity.',
+                text: 'To build precise, reliable, and scalable platforms that solve real operational problems across the industries we serve.',
               },
             ].map((item) => (
               <div
@@ -110,7 +110,7 @@ export default function AboutPage() {
               <div className="relative h-[560px] w-full">
                 <Image
                   src="/ceo.png"
-                  alt="Mercy McAfful Baloyi — Co-Founder & CEO, VeyQon Group"
+                  alt="Mercy McAfful Baloyi, Co-Founder and CEO of VeyQon Group"
                   fill
                   className="object-cover object-top"
                 />
@@ -150,7 +150,7 @@ export default function AboutPage() {
       {/* Bottom CTA */}
       <section className="py-20">
         <div className="max-w-xl mx-auto px-6 md:px-10 text-center space-y-6">
-          <h2 className="text-3xl font-bold">Ready to work with us?</h2>
+          <h2 className="text-3xl font-bold">Get Early Access to ShareConLoad</h2>
           <div className="flex flex-wrap justify-center gap-4">
             <a href="https://www.shareconload.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
               Join Waitlist
