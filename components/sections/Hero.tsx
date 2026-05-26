@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 const SCL_URL = 'https://www.shareconload.com/'
 
 export function Hero() {
@@ -33,9 +31,6 @@ export function Hero() {
               <a href={SCL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                 Join Waitlist
               </a>
-              <Link href="/contact" className="btn btn-outline btn-lg">
-                Contact Us
-              </Link>
             </div>
           </div>
 

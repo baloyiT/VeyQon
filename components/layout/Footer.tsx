@@ -7,7 +7,6 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'ShareConLoad', href: '/shareconload' },
-  { label: 'Contact', href: '/contact' },
 ]
 
 const solutions = [

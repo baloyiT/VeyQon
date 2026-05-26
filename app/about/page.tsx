@@ -151,9 +151,6 @@ export default function AboutPage() {
         <div className="max-w-xl mx-auto px-6 md:px-10 text-center space-y-6">
           <h2 className="text-3xl font-bold">Ready to work with us?</h2>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="btn btn-primary">
-              Contact Us
-            </Link>
             <a href="https://www.shareconload.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
               Join Waitlist
             </a>
