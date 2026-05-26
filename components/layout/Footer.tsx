@@ -11,9 +11,6 @@ const navLinks = [
 
 const solutions = [
   { label: 'ShareConLoad', href: SCL_URL, note: 'Logistics Platform', external: true },
-  { label: 'Fintech', href: '#', note: 'Coming Soon', external: false },
-  { label: 'AI Solutions', href: '#', note: 'Coming Soon', external: false },
-  { label: 'Consulting', href: '#', note: 'Coming Soon', external: false },
 ]
 
 export function Footer() {
