@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — ShareConLoad',
@@ -44,6 +45,14 @@ export default function PrivacyPolicyPage() {
       {/* Hero */}
       <section className="py-20 border-b border-base-300">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <div className="flex items-center gap-2 text-sm text-neutral mb-6">
+            <Link href="/policies" className="hover:text-primary transition-colors">Policies</Link>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            <Link href="/policies/shareconload" className="hover:text-primary transition-colors">ShareConLoad</Link>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            <span className="text-base-content">Privacy Policy</span>
+          </div>
+
           <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">Legal · ShareConLoad</p>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ fontFamily: 'var(--font-sora)' }}>
             Privacy Policy

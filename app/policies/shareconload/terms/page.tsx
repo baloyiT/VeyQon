@@ -53,6 +53,14 @@ export default function TermsPage() {
       {/* Hero */}
       <section className="py-20 border-b border-base-300">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <div className="flex items-center gap-2 text-sm text-neutral mb-6">
+            <Link href="/policies" className="hover:text-primary transition-colors">Policies</Link>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            <Link href="/policies/shareconload" className="hover:text-primary transition-colors">ShareConLoad</Link>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            <span className="text-base-content">Terms & Conditions</span>
+          </div>
+
           <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">Legal · ShareConLoad</p>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ fontFamily: 'var(--font-sora)' }}>
             Terms &amp; Conditions
@@ -137,7 +145,7 @@ export default function TermsPage() {
               <p>Where an Operator fails to perform a confirmed Shipment, ShareConLoad may investigate the matter, attempt reassignment to an alternative Operator, issue refunds, or provide platform credits where commercially appropriate. Refund timelines may vary depending on payment provider processing requirements, banking systems, and dispute investigation outcomes.</p>
               <p>
                 For full details on cancellation stages, refund eligibility, operator non-performance, force majeure, and chargeback rules, please refer to the{' '}
-                <Link href="/cancellation" className="text-primary hover:underline font-semibold">
+                <Link href="/policies/shareconload/cancellation" className="text-primary hover:underline font-semibold">
                   Cancellation &amp; Refund Policy
                 </Link>.
               </p>
@@ -175,7 +183,7 @@ export default function TermsPage() {
             <Section number="17" title="Privacy and Data Usage">
               <p>
                 Use of the Platform is subject to ShareConLoad&apos;s{' '}
-                <Link href="/privacy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>,
+                <Link href="/policies/shareconload/privacy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>,
                 which is incorporated herein by reference. Users consent to the collection and processing of
                 operational and transaction-related information necessary for service delivery and compliance purposes.
               </p>

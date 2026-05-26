@@ -12,6 +12,14 @@ export default function PricingPage() {
       {/* Hero */}
       <section className="py-20 border-b border-base-300">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <div className="flex items-center gap-2 text-sm text-neutral mb-6">
+            <Link href="/policies" className="hover:text-primary transition-colors">Policies</Link>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            <Link href="/policies/shareconload" className="hover:text-primary transition-colors">ShareConLoad</Link>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            <span className="text-base-content">Pricing</span>
+          </div>
+
           <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">Pricing · ShareConLoad</p>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ fontFamily: 'var(--font-sora)' }}>
             Simple, Transparent Pricing
@@ -208,7 +216,7 @@ export default function PricingPage() {
 
           {/* ── Related links ── */}
           <div className="flex flex-col sm:flex-row gap-3 text-sm">
-            <Link href="/cancellation" className="flex-1 flex items-center justify-between card bg-base-200 border border-base-300 px-5 py-4 hover:border-primary/40 transition-colors">
+            <Link href="/policies/shareconload/cancellation" className="flex-1 flex items-center justify-between card bg-base-200 border border-base-300 px-5 py-4 hover:border-primary/40 transition-colors">
               <div>
                 <p className="font-semibold text-base-content">Cancellation &amp; Refund Policy</p>
                 <p className="text-xs text-neutral mt-0.5">Deposit windows, refund eligibility, and operator non-performance rules</p>
@@ -217,7 +225,7 @@ export default function PricingPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </Link>
-            <Link href="/terms" className="flex-1 flex items-center justify-between card bg-base-200 border border-base-300 px-5 py-4 hover:border-primary/40 transition-colors">
+            <Link href="/policies/shareconload/terms" className="flex-1 flex items-center justify-between card bg-base-200 border border-base-300 px-5 py-4 hover:border-primary/40 transition-colors">
               <div>
                 <p className="font-semibold text-base-content">Terms &amp; Conditions</p>
                 <p className="text-xs text-neutral mt-0.5">Full payment terms, booking conditions, and platform rules</p>
