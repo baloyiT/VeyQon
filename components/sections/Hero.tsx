@@ -79,7 +79,7 @@ export function Hero() {
           <div style={{ maxWidth: '480px' }}>
 
             <p className="text-primary font-bold uppercase tracking-[0.22em] mb-3" style={{ fontSize: '11px' }}>
-              Global Operational Technology Group
+              South African Technology Company
             </p>
             <div className="mb-6" style={{ width: '32px', height: '2px', backgroundColor: '#C8A45D' }} />
 
@@ -93,9 +93,9 @@ export function Hero() {
             </h1>
 
             <p className="text-neutral leading-relaxed mb-8" style={{ fontSize: '15px', maxWidth: '380px' }}>
-              VeyQon Group develops operational technologies and digital platforms
-              that improve visibility, coordination, and execution across logistics,
-              infrastructure, and enterprise operations.
+              VeyQon develops modern digital platforms and intelligent business
+              solutions that improve operational efficiency, connectivity, and access
+              across logistics, transport, and enterprise operations.
             </p>
 
             <a href={SCL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">

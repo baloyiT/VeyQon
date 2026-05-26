@@ -8,7 +8,7 @@ import { GoldIcon } from '@/components/ui/GoldIcon'
 export const metadata: Metadata = {
   title: 'About — VeyQon Group',
   description:
-    'VeyQon Group builds practical digital infrastructure for industries worldwide, improving coordination, visibility, and operational efficiency.',
+    'VeyQon is a South African technology company developing modern digital platforms and intelligent business solutions across logistics, transport, and enterprise operations.',
 }
 
 
@@ -31,11 +31,12 @@ export default function AboutPage() {
             About VeyQon Group
           </p>
           <h1 className="text-5xl md:text-6xl font-bold leading-tight max-w-4xl mx-auto">
-            Building Practical Digital Infrastructure for Modern Industries
+            A South African Technology Company Building Scalable Digital Platforms
           </h1>
           <p className="text-neutral text-lg leading-relaxed max-w-2xl mx-auto">
-            VeyQon Group develops operational platforms and enterprise technologies that improve
-            coordination, visibility, and operational efficiency across complex business environments.
+            VeyQon develops modern digital platforms and intelligent business solutions that improve
+            operational efficiency, connectivity, and access across logistics, transport, and enterprise
+            operations.
           </p>
         </div>
       </section>
@@ -46,24 +47,24 @@ export default function AboutPage() {
           <div className="max-w-3xl space-y-6 text-base-content/80 leading-relaxed">
             <SectionHeading eyebrow="Our Story" heading="Who We Are" />
             <p>
-              VeyQon Group is an operational technology company building digital platforms
-              and enterprise systems for industries that rely on coordination, movement, and
-              infrastructure worldwide.
+              VeyQon Group is a South African technology company focused on developing modern
+              digital platforms and intelligent business solutions across multiple industries.
             </p>
             <p>
-              We started with a simple observation: across global logistics and infrastructure
-              sectors, the biggest operational problems are not caused by a lack of capacity. They
-              are caused by a lack of visibility and coordination. Containers move empty. Cargo
-              waits for operators. Systems do not talk to each other.
+              We build scalable products that improve operational efficiency, connectivity, and
+              access within sectors such as logistics, transport, and enterprise operations. Our
+              platforms are designed for the real constraints and commercial dynamics of the
+              markets we serve — not a hypothetical version of them.
             </p>
             <p>
-              Our answer is practical digital platforms built for the real operational environment
-              of modern business, not for a hypothetical version of it. We build with the
-              constraints, connectivity realities, and commercial dynamics of real markets in mind.
+              Our approach is straightforward: identify where fragmented systems, manual
+              coordination, and poor visibility are costing businesses time and money — then build
+              the digital infrastructure to solve it with precision and reliability.
             </p>
             <p>
-              VeyQon Group is the parent of ShareConLoad and future ventures in fintech, AI
-              solutions, and enterprise consulting. Every venture operates under a single
+              VeyQon's first platform is ShareConLoad, a digital logistics marketplace connecting
+              cargo owners with transport operators to optimise shared container space and
+              streamline shipping processes. Every product we build operates under a single
               commitment: precision, reliability, and scale.
             </p>
           </div>

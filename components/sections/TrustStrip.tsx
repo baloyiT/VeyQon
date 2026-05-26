@@ -1,10 +1,10 @@
 import { Globe, Building2, Container, BarChart3 } from 'lucide-react'
 
 const items = [
-  { icon: Globe, label: 'Built for Complex Operational Environments' },
-  { icon: Building2, label: 'Enterprise-Focused Technology' },
-  { icon: Container, label: 'Logistics & Infrastructure Solutions' },
-  { icon: BarChart3, label: 'Operational Intelligence Platforms' },
+  { icon: Globe, label: 'South African Technology Company' },
+  { icon: Building2, label: 'Scalable Digital Platforms' },
+  { icon: Container, label: 'Logistics & Transport Solutions' },
+  { icon: BarChart3, label: 'Intelligent Business Solutions' },
 ]
 
 export function TrustStrip() {

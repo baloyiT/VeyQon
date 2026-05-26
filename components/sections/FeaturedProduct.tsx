@@ -3,11 +3,11 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 const SCL_URL = 'https://www.shareconload.com/'
 
 const features = [
-  'Cargo matching between operators and shippers',
-  'Real-time capacity visibility across the network',
+  'Cargo matching between cargo owners and transport operators',
+  'Optimised shared container space across routes',
   'Digital coordination replacing phone-based operations',
-  'Verified operator and shipper network',
-  'Operational optimisation for empty container reduction',
+  'Streamlined shipping from booking to delivery',
+  'Verified operator and cargo owner network',
 ]
 
 export function FeaturedProduct() {
@@ -22,7 +22,7 @@ export function FeaturedProduct() {
             </p>
             <SectionHeading
               heading="ShareConLoad"
-              subtext="A digital freight marketplace connecting container operators with verified cargo opportunities across Africa."
+              subtext="A digital logistics marketplace connecting cargo owners with transport operators to optimise shared container space and streamline shipping."
             />
             <ul className="space-y-3">
               {features.map((f) => (

@@ -1,4 +1,4 @@
-import { Truck, Radio, Briefcase } from 'lucide-react'
+import { Truck, Package, Briefcase } from 'lucide-react'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
 const industries = [
@@ -6,19 +6,19 @@ const industries = [
     icon: Truck,
     title: 'Logistics & Freight',
     description:
-      'Container movement, freight coordination, and cargo visibility across global trade routes.',
+      'Shared container logistics, cargo coordination, and digital freight matching across trade routes.',
   },
   {
-    icon: Radio,
-    title: 'Telecom & Infrastructure',
+    icon: Package,
+    title: 'Transport',
     description:
-      'Operational systems for telecom infrastructure management, field operations, and asset tracking.',
+      'Operational platforms that connect transport operators with cargo owners, reducing empty runs and improving fleet efficiency.',
   },
   {
     icon: Briefcase,
     title: 'Enterprise Operations',
     description:
-      'Digital platforms for large enterprise operational coordination, reporting, and workflow management.',
+      'Digital platforms that improve operational efficiency, connectivity, and access for complex enterprise environments.',
   },
 ]
 
@@ -30,7 +30,7 @@ export function Industries() {
           <SectionHeading
             eyebrow="Industries"
             heading="Sectors We Serve"
-            subtext="Our platforms are built for the operational realities of complex business environments worldwide."
+            subtext="We build scalable products for the operational realities of logistics, transport, and enterprise business."
           />
         </div>
         <div className="grid md:grid-cols-3 gap-6">
