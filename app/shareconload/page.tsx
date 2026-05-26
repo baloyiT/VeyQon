@@ -181,8 +181,9 @@ export default function ShareConLoadPage() {
             </div>
             <SectionHeading eyebrow="Introducing ShareConLoad" heading="A Global Digital Freight Marketplace" />
             <p className="text-neutral leading-relaxed">
-              Built to connect container operators directly with verified cargo owners worldwide —
-              designed to maximise utilisation, reduce friction, and move freight smarter.
+              Built to connect cargo owners with transport operators to optimise shared container
+              space and streamline shipping. Designed to maximise utilisation, reduce friction,
+              and move freight smarter.
             </p>
           </div>
 

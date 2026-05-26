@@ -7,25 +7,25 @@ const points = [
     icon: Map,
     title: 'Operational Understanding',
     description:
-      'We build from deep familiarity with how complex logistics and enterprise operations actually work across global markets, not how they should work in theory.',
+      'VeyQon platforms are shaped by how industries actually operate, not adapted from generic software to fit a sector they were never designed for.',
   },
   {
     icon: Globe,
     title: 'Built for Complexity',
     description:
-      "Our platforms are engineered for the world's most demanding operational environments — connectivity constraints, route complexity, and multi-currency markets.",
+      'Real operational environments are complex. Our products are built to handle that complexity without oversimplifying in ways that break under real conditions.',
   },
   {
     icon: TrendingUp,
     title: 'Scalable Platforms',
     description:
-      'Every system we build is designed to grow, from a single operator to a continental network without architectural rework.',
+      'From first deployment to full-scale network, VeyQon products grow with the businesses and industries they serve. No re-platforming required.',
   },
   {
     icon: Lightbulb,
     title: 'Practical Innovation',
     description:
-      'We focus on innovation that solves real problems, not innovation for its own sake. Every feature earns its place.',
+      'VeyQon products do not accumulate features. Every capability in our platforms exists because it solves a specific operational problem with precision.',
   },
 ]
 
@@ -36,8 +36,8 @@ export function WhyVeyQon() {
         <div className="mb-14">
           <SectionHeading
             eyebrow="Why VeyQon"
-            heading="Built Different. Intentionally."
-            subtext="Four principles that define how we approach every platform we build."
+            heading="Platforms Built for Operational Reality"
+            subtext="What sets VeyQon products apart from generic software."
           />
         </div>
         <div className="grid sm:grid-cols-2 gap-8">

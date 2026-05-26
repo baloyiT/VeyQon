@@ -1,25 +1,25 @@
-import { Layers, LineChart, GitMerge } from 'lucide-react'
+import { Layers, LineChart, Network } from 'lucide-react'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { GoldIcon } from '@/components/ui/GoldIcon'
 
 const cards = [
   {
     icon: Layers,
-    title: 'Digital Platforms',
+    title: 'Operational Platforms',
     description:
-      'Operational systems that improve visibility, coordination, and execution across complex business environments.',
+      'Scalable operational systems that improve coordination, workflow visibility, and execution across complex operational environments.',
   },
   {
     icon: LineChart,
     title: 'Operational Intelligence',
     description:
-      'Data-driven decision support that gives operators real-time insight into their logistics and infrastructure operations.',
+      'Real-time operational insight, analytics, and decision support for enterprise and infrastructure operations.',
   },
   {
-    icon: GitMerge,
-    title: 'Systems Integration',
+    icon: Network,
+    title: 'Systems Orchestration',
     description:
-      'Connecting fragmented systems and workflows into unified, efficient digital operations.',
+      'Connecting fragmented systems, workflows, and operational data into unified digital ecosystems.',
   },
 ]
 
@@ -29,9 +29,9 @@ export function WhatWeDo() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="mb-14">
           <SectionHeading
-            eyebrow="What We Do"
-            heading="Operational Technology Built for Real Environments"
-            subtext="We build the digital systems that make businesses worldwide more visible, more coordinated, and more effective."
+            eyebrow="What We Build"
+            heading="Building the Digital Layer for Modern Operations"
+            subtext="We develop operational platforms and digital infrastructure technologies that improve visibility, coordination, execution, and decision-making across enterprise and infrastructure environments."
           />
         </div>
         <div className="grid md:grid-cols-3 gap-6">

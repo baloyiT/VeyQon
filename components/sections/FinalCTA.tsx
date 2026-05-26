@@ -12,11 +12,11 @@ export function FinalCTA() {
       />
       <div className="relative z-10 max-w-3xl mx-auto px-6 md:px-10 text-center space-y-8">
         <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-          Build Smarter Operations with VeyQon Group
+          Start with ShareConLoad. Grow with VeyQon.
         </h2>
         <p className="text-neutral text-lg leading-relaxed">
-          Join the businesses replacing fragmented operations with digital
-          platforms built for scale.
+          VeyQon's first platform is live. Join the waitlist and get positioned
+          before the wider market launch.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a href={SCL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
