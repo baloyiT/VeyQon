@@ -1,5 +1,3 @@
-import { HeroVisual } from './HeroVisual'
-
 const SCL_URL = 'https://www.shareconload.com/'
 
 export function Hero() {
@@ -15,9 +13,7 @@ export function Hero() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-32 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-          {/* Left — text content */}
+        <div className="max-w-3xl">
           <div className="space-y-8">
             <p className="text-primary text-sm font-semibold uppercase tracking-widest">
               Global Operational Technology Group
@@ -37,12 +33,6 @@ export function Hero() {
               </a>
             </div>
           </div>
-
-          {/* Right — operational network visual */}
-          <div className="hidden lg:flex items-center justify-center h-[420px]">
-            <HeroVisual />
-          </div>
-
         </div>
       </div>
     </section>
