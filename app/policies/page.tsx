@@ -15,30 +15,6 @@ const products = [
     available: true,
     policies: ['Privacy Policy', 'Terms & Conditions', 'Cancellation & Refund Policy', 'Pricing'],
   },
-  {
-    name: 'Fintech',
-    tagline: 'Financial Technology Solutions',
-    description: 'Platform policies will be published when this product launches.',
-    href: '#',
-    available: false,
-    policies: [],
-  },
-  {
-    name: 'AI Solutions',
-    tagline: 'Enterprise AI & Automation',
-    description: 'Platform policies will be published when this product launches.',
-    href: '#',
-    available: false,
-    policies: [],
-  },
-  {
-    name: 'Consulting',
-    tagline: 'Enterprise Advisory Services',
-    description: 'Engagement terms and policies will be published when this service launches.',
-    href: '#',
-    available: false,
-    policies: [],
-  },
 ]
 
 export default function PoliciesPage() {
