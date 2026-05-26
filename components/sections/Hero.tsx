@@ -1,13 +1,5 @@
 const SCL_URL = 'https://www.shareconload.com/'
 
-const SECTORS = [
-  { label: 'LOGISTICS',              top: '13%', left: '7%'  },
-  { label: 'ENERGY',                 top: '8%',  right: '5%' },
-  { label: 'TELECOMMUNICATIONS',     top: '58%', left: '2%'  },
-  { label: 'INDUSTRY',               top: '56%', right: '4%' },
-  { label: 'ENTERPRISE OPERATIONS',  top: '80%', left: '30%' },
-]
-
 export function Hero() {
   return (
     <section className="bg-base-100 relative overflow-hidden" style={{ minHeight: '100svh' }}>
@@ -38,16 +30,6 @@ export function Hero() {
             }}
           />
 
-          {/* Sector labels */}
-          {SECTORS.map((s) => (
-            <div
-              key={s.label}
-              className="absolute z-20 text-white/60 text-[9px] font-bold tracking-[0.22em]"
-              style={{ top: s.top, left: s.left, right: (s as { right?: string }).right }}
-            >
-              {s.label}
-            </div>
-          ))}
         </div>
 
         {/* Text content — left */}
