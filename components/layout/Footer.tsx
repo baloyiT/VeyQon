@@ -117,12 +117,18 @@ export function Footer() {
       <div className="border-t border-base-300">
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral">
           <p>© {new Date().getFullYear()} VeyQon Group. All rights reserved.</p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
+            <Link href="/pricing" className="hover:text-primary transition-colors">
+              Pricing
+            </Link>
             <Link href="/privacy" className="hover:text-primary transition-colors">
               Privacy Policy
             </Link>
             <Link href="/terms" className="hover:text-primary transition-colors">
               Terms of Service
+            </Link>
+            <Link href="/cancellation" className="hover:text-primary transition-colors">
+              Cancellation &amp; Refund Policy
             </Link>
           </div>
         </div>

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — VeyQon Group',
-  description: 'Privacy Policy for the VeyQon Group corporate website.',
+  title: 'Privacy Policy — ShareConLoad',
+  description: 'Privacy Policy for the ShareConLoad logistics marketplace platform operated by VEYQON GROUP (Pty) Ltd.',
 }
 
 function Section({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
@@ -13,6 +12,15 @@ function Section({ number, title, children }: { number: string; title: string; c
         {number}. {title}
       </h2>
       <div className="text-sm text-neutral leading-relaxed space-y-3">{children}</div>
+    </div>
+  )
+}
+
+function Sub({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
+  return (
+    <div className="mb-3">
+      <p className="font-semibold text-base-content/80 mb-1.5">{number} {title}</p>
+      {children}
     </div>
   )
 }
@@ -30,19 +38,17 @@ function Bullets({ items }: { items: string[] }) {
   )
 }
 
-export default function PrivacyPage() {
+export default function PrivacyPolicyPage() {
   return (
     <>
       {/* Hero */}
       <section className="py-20 border-b border-base-300">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">Legal</p>
+          <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">Legal · ShareConLoad</p>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ fontFamily: 'var(--font-sora)' }}>
             Privacy Policy
           </h1>
-          <p className="text-neutral text-sm">
-            Effective Date: 21 May 2026 · VEYQON GROUP (Pty) Ltd
-          </p>
+          <p className="text-neutral text-sm">Effective Date: 09 May 2026 · VEYQON GROUP (Pty) Ltd</p>
         </div>
       </section>
 
@@ -53,170 +59,111 @@ export default function PrivacyPage() {
 
             <div className="card bg-base-200 border border-base-300 p-8 sm:p-10 mb-8">
               <p className="text-sm text-neutral leading-relaxed">
-                This Privacy Policy describes how <strong className="text-base-content">VEYQON GROUP (Pty) Ltd</strong>,
-                registration number 2026/353683/07, Republic of South Africa (&quot;VeyQon&quot;, &quot;we&quot;, &quot;us&quot;,
-                or &quot;our&quot;) collects, uses, and protects information when you visit the VeyQon Group
-                corporate website at <strong className="text-base-content">veyqon.com</strong> (&quot;Site&quot;).
-                This policy applies to the corporate website only. For privacy practices relating
-                to the ShareConLoad logistics platform, please refer to the{' '}
-                <a
-                  href="https://www.shareconload.com/privacy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  ShareConLoad Privacy Policy
-                </a>.
+                This Privacy Policy explains how <strong className="text-base-content">VEYQON GROUP (Pty) Ltd</strong>,
+                registration number 2026/353683/07 (&quot;ShareConLoad&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), collects,
+                uses, stores, processes, and protects personal information through the ShareConLoad platform
+                and related services. ShareConLoad is committed to protecting user privacy in accordance with
+                applicable laws, including the Protection of Personal Information Act, 2013 (&quot;POPIA&quot;) of
+                South Africa. By accessing or using the Platform, you consent to the practices described in
+                this Privacy Policy.
               </p>
             </div>
 
-            <Section number="1" title="Information We Collect">
-              <p>We collect the following categories of information when you use the Site:</p>
-              <p className="font-semibold text-base-content">Information you provide directly:</p>
-              <Bullets items={[
-                'Name and contact details submitted through contact or enquiry forms',
-                'Email address submitted for waitlist registration or correspondence',
-                'Organisation name and role where provided voluntarily',
-                'Content of messages or enquiries submitted through the Site',
-              ]} />
-              <p className="font-semibold text-base-content mt-3">Information collected automatically:</p>
-              <Bullets items={[
-                'IP address and general geographic location',
-                'Browser type, device type, and operating system',
-                'Pages visited, referral source, and time spent on pages',
-                'Technical logs and error data generated during your visit',
-              ]} />
+            <Section number="1" title="About ShareConLoad">
+              <p>ShareConLoad is a digital logistics marketplace platform operated by VEYQON GROUP (Pty) Ltd. The Platform facilitates shipment booking and payment coordination between cargo owners and independent transport operators for international maritime shared-container shipping services.</p>
             </Section>
 
-            <Section number="2" title="How We Use Your Information">
-              <p>We use the information we collect for the following purposes:</p>
-              <Bullets items={[
-                'Responding to enquiries, contact form submissions, and correspondence',
-                'Processing waitlist registrations and sending relevant communications',
-                'Improving the Site and understanding how visitors interact with it',
-                'Monitoring and maintaining the security and performance of the Site',
-                'Complying with applicable legal obligations',
-                'Communicating updates about VeyQon Group products and services where you have consented',
-              ]} />
+            <Section number="2" title="Information We Collect">
+              <Sub number="2.1" title="Customer Information">
+                <Bullets items={['Full names', 'Company names', 'Email addresses', 'Telephone numbers', 'Billing information', 'Shipment information', 'Cargo details', 'Customs documentation', 'Import/export documentation', 'Account credentials', 'Communication records', 'Transaction history']} />
+              </Sub>
+              <Sub number="2.2" title="Operator Information">
+                <Bullets items={['Company registration details', 'Business contact information', 'Banking details', 'Tax information', 'Operational licenses', 'Permits and certifications', 'Insurance documentation', 'Shipment performance information', 'Compliance records']} />
+              </Sub>
+              <Sub number="2.3" title="Technical Information">
+                <p className="mb-2">We may automatically collect technical and usage information, including:</p>
+                <Bullets items={['IP addresses', 'Browser type', 'Operating system', 'Device information', 'Login timestamps', 'Platform activity', 'Cookies and session data', 'Analytics and performance information']} />
+              </Sub>
             </Section>
 
-            <Section number="3" title="Legal Basis for Processing">
-              <p>We process personal information on the following legal bases:</p>
-              <Bullets items={[
-                'Consent — where you have provided explicit consent (e.g. waitlist sign-up)',
-                'Legitimate interests — to operate, improve, and secure the Site',
-                'Legal obligation — where processing is required by applicable law',
-                'Contractual necessity — where processing is required to respond to your enquiry',
-              ]} />
+            <Section number="3" title="How We Collect Information">
+              <p className="mb-2">Information may be collected through:</p>
+              <Bullets items={['Account registration', 'Booking submissions', 'Payment processing', 'Customer support interactions', 'Uploaded documents', 'Website usage', 'Cookies and analytics technologies', 'Communications with Operators and Customers']} />
             </Section>
 
-            <Section number="4" title="Third-Party Services">
-              <p>We may use third-party service providers to support Site operations, including:</p>
-              <Bullets items={[
-                'Email delivery providers (for contact form responses and communications)',
-                'Hosting and infrastructure providers (for Site availability)',
-                'Analytics services (for understanding Site usage and performance)',
-              ]} />
-              <p>
-                These providers may process limited personal information on our behalf under
-                appropriate data processing agreements. We do not sell personal information to
-                third parties.
+            <Section number="4" title="How We Use Information">
+              <p className="mb-2">We use personal information to:</p>
+              <Bullets items={['Facilitate shipment bookings', 'Process payments', 'Verify users and Operators', 'Coordinate shipment activities', 'Communicate operational updates', 'Manage disputes and claims', 'Comply with legal obligations', 'Improve platform functionality', 'Detect fraud or suspicious activity', 'Maintain operational security', 'Provide customer support', 'Send service-related notifications']} />
+              <p className="mt-3">Where users consent, we may also send promotional communications, product updates, and marketing information. Users may opt out of marketing communications at any time.</p>
+            </Section>
+
+            <Section number="5" title="Payment Processing">
+              <p>Payments are processed through authorized third-party payment providers, including Paystack. ShareConLoad does not store full payment card details directly unless expressly stated otherwise. Payment information may be subject to the privacy and security policies of third-party payment providers.</p>
+            </Section>
+
+            <Section number="6" title="Sharing of Information">
+              <p className="mb-2">We may share information with:</p>
+              <Bullets items={['Independent Operators and Carriers', 'Payment service providers', 'Customs and regulatory authorities', 'Logistics and operational partners', 'Cloud hosting and technology providers', 'Legal and compliance advisors', 'Law enforcement or government authorities where legally required']} />
+              <p className="mt-3">Information is shared only where reasonably necessary for operational, legal, compliance, or security purposes.</p>
+            </Section>
+
+            <Section number="7" title="International Data Transfers">
+              <p>Because ShareConLoad operates internationally, personal information may be processed, transferred, or stored outside South Africa through third-party service providers and cloud infrastructure providers. By using the Platform, users consent to such international transfers where necessary for service delivery and operational purposes.</p>
+            </Section>
+
+            <Section number="8" title="Data Retention">
+              <p className="mb-2">ShareConLoad retains personal information only for as long as reasonably necessary to:</p>
+              <Bullets items={['Provide services', 'Comply with legal obligations', 'Resolve disputes', 'Enforce agreements', 'Maintain operational records', 'Protect legitimate business interests']} />
+              <p className="mt-3">Certain information may be retained longer where required by law or regulatory obligations.</p>
+            </Section>
+
+            <Section number="9" title="User Rights">
+              <p className="mb-2">Subject to applicable laws, users may request to:</p>
+              <Bullets items={['Access their personal information', 'Correct inaccurate information', 'Update account information', 'Request deletion of personal information where legally permissible', 'Object to certain processing activities', 'Withdraw consent where applicable']} />
+              <p className="mt-3">
+                Requests may be submitted to:{' '}
+                <a href="mailto:support@shareconload.com" className="text-primary hover:underline">
+                  support@shareconload.com
+                </a>. ShareConLoad may require reasonable identity verification before processing requests.
               </p>
             </Section>
 
-            <Section number="5" title="Data Retention">
-              <p>
-                We retain personal information only for as long as necessary for the purposes
-                described in this Policy, or as required by applicable law. Contact enquiry data
-                is retained for a reasonable period to manage correspondence. Where you request
-                deletion of your data, we will action this within a reasonable timeframe subject
-                to any legal retention obligations.
-              </p>
+            <Section number="10" title="Cookies and Tracking Technologies">
+              <p className="mb-2">ShareConLoad may use cookies, session tracking, analytics tools, and similar tracking technologies to:</p>
+              <Bullets items={['Improve platform performance', 'Maintain user sessions', 'Analyze usage patterns', 'Enhance security', 'Improve user experience']} />
+              <p className="mt-3">Users may disable cookies through browser settings, although some platform functionality may be affected.</p>
             </Section>
 
-            <Section number="6" title="Cookies and Tracking">
-              <p>
-                The Site may use cookies or similar technologies to support functionality,
-                remember preferences, and analyse Site traffic. You may manage or disable cookies
-                through your browser settings. Disabling certain cookies may affect Site
-                functionality.
-              </p>
+            <Section number="11" title="Data Security">
+              <p>ShareConLoad implements reasonable technical and organizational security measures to protect personal information against unauthorized access, misuse, loss, disclosure, alteration, and destruction. Despite reasonable safeguards, no internet-based system can be guaranteed completely secure. Users are responsible for maintaining the confidentiality of their account credentials.</p>
             </Section>
 
-            <Section number="7" title="Data Security">
-              <p>
-                We implement reasonable technical and organisational measures to protect personal
-                information from unauthorised access, loss, or misuse. No method of internet
-                transmission or electronic storage is completely secure, and we cannot guarantee
-                absolute security.
-              </p>
+            <Section number="12" title="Operator and Third-Party Responsibility">
+              <p>Operators and third-party service providers may independently process personal information in connection with shipment execution and operational services. ShareConLoad is not responsible for the privacy practices of independent third parties. Users are encouraged to review third-party privacy policies where applicable.</p>
             </Section>
 
-            <Section number="8" title="Your Rights">
-              <p>Subject to applicable law, you may have the right to:</p>
-              <Bullets items={[
-                'Access the personal information we hold about you',
-                'Request correction of inaccurate or incomplete information',
-                'Request deletion of your personal information',
-                'Object to or restrict certain types of processing',
-                'Withdraw consent where processing is based on consent',
-              ]} />
-              <p>
-                To exercise any of these rights, please contact us using the details in
-                Section 10 below.
-              </p>
+            <Section number="13" title="Children and Minors">
+              <p>The Platform is not intended for individuals under the age of 18 years. ShareConLoad does not knowingly collect personal information from minors. If we become aware that information relating to a minor has been submitted, such information may be removed.</p>
             </Section>
 
-            <Section number="9" title="Links to Third-Party Sites">
-              <p>
-                The Site may contain links to third-party websites, including the ShareConLoad
-                platform. VeyQon Group is not responsible for the privacy practices of
-                third-party sites. We encourage you to review the privacy policies of any
-                third-party sites you visit.
-              </p>
+            <Section number="14" title="Legal Disclosures">
+              <p className="mb-2">ShareConLoad may disclose personal information:</p>
+              <Bullets items={['Where required by law', 'In response to lawful regulatory requests', 'To protect legal rights', 'To investigate fraud or unlawful conduct', 'To protect platform security and operational integrity']} />
             </Section>
 
-            <Section number="10" title="Changes to This Policy">
-              <p>
-                We may update this Privacy Policy from time to time. Updated versions will be
-                published on this page with a revised effective date. Continued use of the Site
-                following any update constitutes acceptance of the revised Policy.
-              </p>
+            <Section number="15" title="Changes to This Privacy Policy">
+              <p>ShareConLoad reserves the right to update or amend this Privacy Policy from time to time. Updated versions become effective upon publication on the Platform. Continued use of the Platform constitutes acceptance of revised policies.</p>
             </Section>
 
-            <Section number="11" title="Contact">
+            <Section number="16" title="Contact Information">
               <div className="card bg-base-200 border border-base-300 border-l-4 border-l-primary p-5 text-sm text-neutral space-y-1">
                 <p className="font-bold text-base-content">VEYQON GROUP (Pty) Ltd</p>
                 <p>Registration Number: 2026/353683/07</p>
                 <p>Republic of South Africa</p>
-                <p>
-                  Email:{' '}
-                  <a href="mailto:support@shareconload.com" className="text-primary hover:underline">
-                    support@shareconload.com
-                  </a>
-                </p>
-                <p>
-                  Website:{' '}
-                  <a href="https://veyqon.com" className="text-primary hover:underline">
-                    veyqon.com
-                  </a>
-                </p>
+                <p>Website: <a href="https://shareconload.com" className="text-primary hover:underline">shareconload.com</a></p>
+                <p>Email: <a href="mailto:support@shareconload.com" className="text-primary hover:underline">support@shareconload.com</a></p>
               </div>
             </Section>
-
-            <div className="border-t border-base-300 pt-6 flex flex-col sm:flex-row gap-3 text-sm">
-              <Link href="/terms" className="text-primary hover:underline">
-                Terms of Service →
-              </Link>
-              <a
-                href="https://www.shareconload.com/cancellation"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                ShareConLoad Cancellation &amp; Refund Policy →
-              </a>
-            </div>
 
           </div>
         </div>
